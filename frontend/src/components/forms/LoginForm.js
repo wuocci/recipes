@@ -42,6 +42,7 @@ const LoginForm = () => {
                 onChange={handleUsername}
                 id="standard-username"
                 label="Username"
+                variant="outlined"
             />
             <TextField
                 onChange={handlePassword}
@@ -49,10 +50,12 @@ const LoginForm = () => {
                 label="Password"
                 type="password"
                 autoComplete="current-password"
+                variant="outlined"
             />
             <Button variant="contained" color="primary" onClick={checkLogin}>
                 Login
             </Button> 
+            <p>Forgot <a href="">password?</a></p>
         </div>
     );
   }
