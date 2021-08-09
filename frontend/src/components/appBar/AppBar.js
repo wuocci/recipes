@@ -2,6 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import logo from '../../img/logoAppbar.svg';
 
 export default function ButtonAppBar() {
     return (
@@ -11,6 +12,7 @@ export default function ButtonAppBar() {
                     <Typography variant="h6" className="ToolBar">
                         Recipebox
                     </Typography>
+                    <img src={logo} alt="logo of the brand"></img>
                 </Toolbar>
             </AppBar>
         </div>
