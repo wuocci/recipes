@@ -4,7 +4,7 @@ import logo from '../../img/logoRecipeBox.svg'
 const FrontPage = () => {
     return (
         <div className="FrontPage">
-            <ButtonAppBar />
+            <ButtonAppBar isProfilePage={false} />
         </div>
     );
 }
