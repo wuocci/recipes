@@ -1,4 +1,5 @@
-import ButtonAppBar from '../appBar/AppBar.js';
+import ButtonAppBar from '../../components/appBar/AppBar.js';
+import logo from '../../img/logoRecipeBox.svg'
 
 const FrontPage = () => {
     return (

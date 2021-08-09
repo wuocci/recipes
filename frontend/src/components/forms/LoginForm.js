@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Notification from '../Notification'
-import logo from '../logo/logoRecipeBox.svg'
+import Notification from '../../Notification'
 
 
 const LoginForm = () => {
@@ -30,16 +29,14 @@ const LoginForm = () => {
     }
 
     return (
-      <div className="login-page">
-          <img src={logo} alt="logo of the brand"></img>
-        {showError &&
+        <div className="login-form">
+            {showError && 
             <Notification 
                 showError={showError}
                 errorMessage={"Invalid username or password"}
                 type="error"
             /> 
-        }  
-        <div className="login-form">
+            }  
             <h1>Login</h1>
             <TextField
                 onChange={handleUsername}
@@ -57,7 +54,6 @@ const LoginForm = () => {
                 Login
             </Button> 
         </div>
-      </div>
     );
   }
   
