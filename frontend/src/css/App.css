@@ -1,23 +1,40 @@
+/* FONT STUFF */
+
+
+h1{
+  font-weight: 300;
+}
+
+
+
 /* LOGIN PAGE STUFF */
 
 .login-form{
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 350px;
   align-items: center;
   margin: 0 auto;
   margin-top: 50px;
   border: 1px solid rgb(131, 131, 131);
+  border-radius: 10px;
 }
 
+.login-form p{
+  font-size: 13px;
+  margin-left: 200px;
+}
+
+
 .login-form .MuiButton-root{
-  margin-top: 50px;
-  margin-bottom: 20px;
-  width: 100px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 300px;
 }
 
 .login-form .MuiTextField-root{
   width: 250px;
+  margin: 10px;
 }
 
 .login-page img{
@@ -26,3 +43,28 @@
   margin: 0 auto;
 }
 
+/* SIGN UP PAGE STUFF */
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 400px;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 1px solid rgb(131, 131, 131);
+  border-radius: 10px;
+}
+
+
+.sign-up-form .MuiButton-root{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.sign-up-form .MuiTextField-root{
+  width: 250px;
+  margin: 10px;
+}
