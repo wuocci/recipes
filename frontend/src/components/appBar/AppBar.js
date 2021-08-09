@@ -15,18 +15,22 @@ const ButtonAppBar = (props) => {
     const isProfilePage = props.isProfilePage;
     if (!isProfilePage) {
         return (
-            <div className="AppBar">
+            <div className="appbar">
                 <AppBar position="static">
                     <Toolbar>
-                        <Link to="/">
-                            <img src={logo} alt="logo of the brand"></img>
-                        </Link>
-                        <Link to="/LoginPage">
-                            <LogInButton />
-                        </Link>
-                        <Link to="/SignUpPage">
-                            <SignUpButton />
-                        </Link>
+                        <div className="appbar-logo">
+                            <Link to="/">
+                                <img src={logo} alt="logo of the brand"></img>
+                            </Link>
+                        </div>
+                        <div className="appbar-buttons">
+                            <Link to="/LoginPage">
+                                <LogInButton />
+                            </Link>
+                            <Link to="/SignUpPage">
+                                <SignUpButton />
+                            </Link>
+                        </div>
                     </Toolbar>
                 </AppBar>
             </div>

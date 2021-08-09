@@ -6,7 +6,6 @@ h1{
 }
 
 
-
 /* LOGIN PAGE STUFF */
 
 .login-form{
@@ -24,7 +23,6 @@ h1{
   font-size: 13px;
   margin-left: 200px;
 }
-
 
 .login-form .MuiButton-root{
   margin-top: 20px;
@@ -67,4 +65,20 @@ h1{
 .sign-up-form .MuiTextField-root{
   width: 250px;
   margin: 10px;
+}
+
+/* APPBAR STUFF */
+
+.MuiAppBar-root{
+  background-color: #A7D2CB !important;
+}
+
+.appbar-logo{
+  margin-left: 40%;
+}
+
+.appbar-buttons{
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
 }
