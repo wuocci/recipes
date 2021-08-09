@@ -2,8 +2,8 @@ import Button from '@material-ui/core/Button';
 
 const LogInButton = () => {
     return (
-        <div className="LogInButton">
-            <Button color="inherit">Login</Button>
+        <div className="LogInButtonDiv">
+            <Button className="LogInButton" color="inherit">Login</Button>
         </div>
     );
 }
