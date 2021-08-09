@@ -1,0 +1,28 @@
+/* LOGIN PAGE STUFF */
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: 1px solid rgb(131, 131, 131);
+}
+
+.login-form .MuiButton-root{
+  margin-top: 50px;
+  margin-bottom: 20px;
+  width: 100px;
+}
+
+.login-form .MuiTextField-root{
+  width: 250px;
+}
+
+.login-page img{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
