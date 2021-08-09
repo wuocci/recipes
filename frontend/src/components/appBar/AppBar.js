@@ -18,7 +18,9 @@ const ButtonAppBar = (props) => {
             <div className="AppBar">
                 <AppBar position="static">
                     <Toolbar>
-                        <img src={logo} alt="logo of the brand"></img>
+                        <Link to="/">
+                            <img src={logo} alt="logo of the brand"></img>
+                        </Link>
                         <Link to="/LoginPage">
                             <LogInButton />
                         </Link>

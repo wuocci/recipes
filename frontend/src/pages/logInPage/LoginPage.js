@@ -1,13 +1,22 @@
 import React, { useRef, useState } from 'react';
 import logo from '../../img/logoRecipeBox.svg'
 import LoginForm from '../../components/forms/LoginForm';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+
 
 
 const LoginPage = () => {
-    return(
+    return (
         <div className="login-page">
-            <img src={logo} alt="logo of the brand"></img>
-            <LoginForm/>
+            <Link to="/">
+                <img src={logo} alt="logo of the brand"></img>
+            </Link>
+            <LoginForm />
         </div>
     )
 }
