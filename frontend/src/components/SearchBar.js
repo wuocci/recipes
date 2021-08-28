@@ -4,22 +4,40 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
-import { flexbox } from '@material-ui/system';
+import SearchIcon from '@material-ui/icons/Search';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+
 
 const SearchBar = () => {
 
-    return (<div style={{ width: 300 }}>
+    const top10recipes = [
+        { title: 'Margarita' },
+        { title: 'Ramen' }
+    ]
+    
+    return (
+    <div className="search-bar">
         <Autocomplete
             className='SearchBar'
             freeSolo
             options={top10recipes.map(option => option.title)}
             renderInput={params => (
-                <TextField {...params} label="Search bar" margin="normal" variant="outlined" />
+                <TextField {...params} label="Search recipes..." margin="normal" variant="outlined" 
+                InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
             )}
         />
         <SearchButton />
@@ -30,8 +48,8 @@ const SearchBar = () => {
 
 const SearchButton = () => {
     return (
-        <div className="SearchButtonDiv">
-            <Button className="SearchButton" color="inherit">Search</Button>
+        <div className="search-button">
+            <Button color="inherit">Search</Button>
         </div>
     );
 }
@@ -54,19 +72,26 @@ const AdvancedSearch = () => {
 
     if (!advancedSearch) {
         return (
-            <div className="AdvancedSearchDivClosed">
-                <Button className="AdvancedSearchButtonClosed" onClick={() => setAdvancedSearch(!advancedSearch)} color="inherit">
+            <div className="advanced-search-closed">
+                <Button className="AdvancedSearchButtonClosed" onClick={() => setAdvancedSearch(!advancedSearch)} 
+                        color="inherit"
+                        endIcon={<ArrowDropDownIcon>send</ArrowDropDownIcon>}
+                        >
                     Advanced Search
                 </Button>
             </div>
         );
     } else {
         return (
-            <div className="AdvancedSearchDivOpen">
-                <Button className="AdvancedSearchButtonOpen" onClick={() => setAdvancedSearch(!advancedSearch)} color="inherit">
+            <div className="advanced-search-open">
+                <Button onClick={() => setAdvancedSearch(!advancedSearch)} 
+                        color="inherit"
+                        endIcon={<ArrowDropUpIcon>send</ArrowDropUpIcon>}
+                        >
                     Advanced Search
                 </Button>
-                <Typography component="div" variant="body1">
+                <div className="advanced-open-filters">
+                <Typography component="div" variant="body1"> 
                     <Box display="flex" flexDirection="row">
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Main Category</FormLabel>
@@ -88,14 +113,10 @@ const AdvancedSearch = () => {
                         </FormControl>
                     </Box>
                 </Typography>
+                </div>
             </div>
         )
     }
 }
-
-const top10recipes = [
-    { title: 'Margarita' },
-    { title: 'Ramen' }
-]
 
 export default SearchBar;

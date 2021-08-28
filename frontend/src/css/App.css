@@ -82,3 +82,17 @@ h1{
   flex-direction: row;
   margin-left: auto;
 }
+
+/* SEARCHBAR STUFF */
+
+.search-bar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.MuiAutocomplete-root{
+  width: 50%;
+}
