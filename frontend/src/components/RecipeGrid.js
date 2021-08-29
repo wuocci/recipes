@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import ImageList from '@material-ui/core/ImageList';
-import ImageListItem from '@material-ui/core/ImageListItem';
-import ImageListItemBar from '@material-ui/core/ImageListItemBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-import axios from 'axios'
 import RecipeDialog from './RecipeDialog';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardHeader from '@material-ui/core/CardHeader';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import OpenWithIcon from '@material-ui/icons/OpenWith';
+
 
 
 export default function RecipeGrid() {
@@ -43,28 +47,36 @@ export default function RecipeGrid() {
 
 
     else{
-        return (
+        return(
             <div className="recipe-grid">
-            <ImageList rowHeight={180}>
-                <ImageListItem key="Subheader" cols={2} style={{ height: 'auto' }}>
-                <ListSubheader component="div">December</ListSubheader>
-                </ImageListItem>
+                <Grid container spacing={3}>
                 {recipes.map((item) => (
-                <ImageListItem key={item.id}>
-                    <ImageListItemBar
-                    title={item.title}
-                    subtitle={<span>by: {item.author}</span>}
-                    actionIcon={
-                        <IconButton aria-label={`info about ${item.title}`} onClick={openRecipe}>
-                        <InfoIcon />
-                        </IconButton>
-                    }
-                    />
-                </ImageListItem>
+                    <Grid item xs={3}>
+                        <Card className="recipe-card">
+                        <CardHeader
+                            title={item.title}
+                            subheader={item.published_date}
+                        />
+                            <CardContent>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                {item.descpription
+}
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                                <IconButton aria-label="add to favorites">
+                                    <FavoriteIcon />
+                                </IconButton>
+                                <IconButton aria-label="add to favorites">
+                                    <OpenWithIcon />
+                                </IconButton>
+                            </CardActions>
+                        </Card>
+                    </Grid> 
                 ))}
-            </ImageList>
-            </div>
-        );
+                </Grid>
+            </div> 
+        )
     }
 }
     

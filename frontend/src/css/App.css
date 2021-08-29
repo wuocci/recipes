@@ -74,7 +74,7 @@ h1{
 }
 
 .appbar-logo{
-  margin-left: 40%;
+  margin-left: 45%;
 }
 
 .appbar-buttons{
@@ -94,4 +94,15 @@ h1{
 
 .MuiAutocomplete-root{
   width: 50%;
+}
+
+
+.recipe-grid{
+  flex-grow: 1;
+  height: 200px;
+}
+
+.MuiPaper-root{
+  cursor: pointer;
+  text-align: center;
 }

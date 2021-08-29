@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const RecipeSchema = new mongoose.Schema({
+const recipeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -14,6 +14,12 @@ const RecipeSchema = new mongoose.Schema({
   },
   published_date: {
     type: Date
+  },
+  cooking_time: {
+    type: String
+  },
+  servings: { 
+    type: String
   },
   ingredients: {
     type: Array
@@ -38,7 +44,7 @@ const RecipeSchema = new mongoose.Schema({
   },
   images: {
     type: Buffer
-  }
-});
+  },
+},{ collection : 'recipes' });
 
-module.exports = Book = mongoose.model('book', BookSchema);
+module.exports = mongoose.model('recipe', recipeSchema);
