@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import FrontPage from './pages/frontPage/FrontPage.js';
 import LoginPage from './pages/logInPage/LoginPage.js';
 import SignUpPage from './pages/signUpPage/SignUpPage.js';
-import recipeService from './services.js' 
+//import recipeService from './recipesservice.js' 
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,13 +16,6 @@ const App = () => {
   const [recipes, setRecipes] = useState([])
 
 
-  //get all recipes from database
-  useEffect(() => {
-    recipeService.getAll().then(recipes =>
-      setRecipes(recipes)
-    )
-  }, [])
-
 
   //get user data when page renders
   useEffect(() => {    
@@ -30,7 +23,7 @@ const App = () => {
     if (loggedUserJSON) {      
       const user = JSON.parse(loggedUserJSON)      
       setUser(user)      
-      recipeService.setToken(user.token)    
+      //recipeService.setToken(user.token)    
     }  
   }, 
   [])

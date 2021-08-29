@@ -97,6 +97,7 @@ h1{
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* Divider CSS */
 .MuiDivider-root {
   margin-left: 50% !important;
@@ -164,4 +165,26 @@ h1{
   cursor: pointer;
   text-align: center;
 >>>>>>> d584b09794c728136a6c6d547a95fcf23671d24a
+=======
+/* RECIPE GRID STUFF */
+
+.recipe-grid{
+  display: flex;
+  width: 90%;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.MuiDivider-root{
+  margin-top: 15px !important;
+}
+
+.recipe-card{
+  height: 350px;
+}
+
+.MuiCardHeader-title{
+  font-size: 22px !important;
+>>>>>>> c870df0916fff3bfff5a8152c736df6c2657e320
 }

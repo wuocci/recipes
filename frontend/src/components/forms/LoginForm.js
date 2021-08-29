@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Notification from '../../Notification';
-import recipeService from '../../services.js' 
+//import recipeService from '../../services.js' 
 
 
 const LoginForm = () => {
@@ -20,7 +20,7 @@ const LoginForm = () => {
         setPassWord(event.target.value);
     };
 
-     //simple login check for later authentication and stuff
+    /* //simple login check for later authentication and stuff
      const checkLogin = async (event) => {   
         event.preventDefault()
         try {      
@@ -39,7 +39,7 @@ const LoginForm = () => {
           }
           setPassWord("")
           setUsername("")
-      }
+      }**/
 
     return (
         <div className="login-form">
@@ -65,7 +65,7 @@ const LoginForm = () => {
                 autoComplete="current-password"
                 variant="outlined"
             />
-            <Button variant="contained" color="primary" onClick={checkLogin}>
+            <Button variant="contained" color="primary" >
                 Login
             </Button> 
             <p>Forgot <a href="">password?</a></p>

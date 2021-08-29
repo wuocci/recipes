@@ -10,23 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 
 
-const AlertDialog = () => {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+const RecipeDialog = () => {
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open recipe
-      </Button>
-      
       <Dialog
         open={openDialog}
         onClick={() => toggleModal(false)}
@@ -101,4 +87,4 @@ const AlertDialog = () => {
   );
 }
 
-export default AlertDialog;
+export default RecipeDialog;
