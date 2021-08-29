@@ -74,7 +74,7 @@ h1{
 }
 
 .appbar-logo{
-  margin-left: 40%;
+  margin-left: 45%;
 }
 
 .appbar-buttons{
@@ -92,11 +92,11 @@ h1{
   justify-content: center;
 }
 
-
 .MuiAutocomplete-root{
   width: 50%;
 }
 
+<<<<<<< HEAD
 /* Divider CSS */
 .MuiDivider-root {
   margin-left: 50% !important;
@@ -153,4 +153,15 @@ h1{
   grid-column-end: 1;
   grid-row-start: 4;
   grid-row-end: 4;
+=======
+
+.recipe-grid{
+  flex-grow: 1;
+  height: 200px;
+}
+
+.MuiPaper-root{
+  cursor: pointer;
+  text-align: center;
+>>>>>>> d584b09794c728136a6c6d547a95fcf23671d24a
 }

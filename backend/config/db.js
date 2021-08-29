@@ -1,21 +1,17 @@
-const mongoose = require('mongoose');
-const config = require('config');
-const db = config.get('mongoURI');
+var MongoClient = require( 'mongodb' ).MongoClient;
+const dbURI = "mongodb+srv://hanpiet:ihminenrankaisee@cluster0.zqaw3.mongodb.net/recipes?retryWrites=true&w=majority"
+var _db;
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(
-      db,
-      {
-        useNewUrlParser: true
-      }
-    );
+module.exports = {
 
-    console.log('MongoDB is Connected...');
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
+  connectToServer: function( callback ) {
+    MongoClient.connect( dbURI,  { useNewUrlParser: true }, function( err, client ) {
+      _db  = client.db('recipes');
+      return callback( err );
+    } );
+  },
+
+  getDb: function() {
+    return _db;
   }
 };
-
-module.exports = connectDB;
