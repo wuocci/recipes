@@ -9,7 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import OpenWithIcon from '@material-ui/icons/OpenWith';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import recipeimg from '../img/pesto.jpg'
 
 
 
@@ -24,7 +25,7 @@ export default function RecipeGrid() {
 
   const toggleModal = (val) => setDialog(val)
 
-
+ 
     //fetch recipes from mongodb
     useEffect(() => {
         fetch("http://localhost:8080/recipes")
@@ -49,28 +50,32 @@ export default function RecipeGrid() {
     else{
         return(
             <div className="recipe-grid">
-                <Grid container spacing={3}>
+                <Grid container spacing={5}>
                 {recipes.map((item) => (
-                    <Grid item xs={3}>
+                    <Grid item xs={2,3}>
                         <Card className="recipe-card">
+                        <CardActionArea>
+                            <CardMedia
+                            component="img"
+                            alt="Picture of the recipe"
+                            height="120"
+                            image={recipeimg}
+                            />
                         <CardHeader
                             title={item.title}
-                            subheader={item.published_date}
+                            subheader={" by " + item.author}
                         />
                             <CardContent>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                {item.descpription
-}
+                                {item.description}
                                 </Typography>
                             </CardContent>
                             <CardActions disableSpacing>
                                 <IconButton aria-label="add to favorites">
                                     <FavoriteIcon />
                                 </IconButton>
-                                <IconButton aria-label="add to favorites">
-                                    <OpenWithIcon />
-                                </IconButton>
                             </CardActions>
+                            </CardActionArea>
                         </Card>
                     </Grid> 
                 ))}

@@ -96,13 +96,24 @@ h1{
   width: 50%;
 }
 
+/* RECIPE GRID STUFF */
 
 .recipe-grid{
-  flex-grow: 1;
-  height: 200px;
+  display: flex;
+  width: 90%;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
-.MuiPaper-root{
-  cursor: pointer;
-  text-align: center;
+.MuiDivider-root{
+  margin-top: 15px !important;
+}
+
+.recipe-card{
+  height: 350px;
+}
+
+.MuiCardHeader-title{
+  font-size: 22px !important;
 }
