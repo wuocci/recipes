@@ -96,3 +96,61 @@ h1{
 .MuiAutocomplete-root{
   width: 50%;
 }
+
+/* Divider CSS */
+.MuiDivider-root {
+  margin-left: 50% !important;
+  height: 75% !important;
+}
+
+/* Recipedialog CSS-Grid */
+
+.recipeContainer {
+  display: grid;
+  margin: 10px;
+  column-gap: 10px;
+  grid-template-columns: repeat(4, 4fr);
+  grid-template-rows: [first-line] 10% [second-line] 50% [third-line] 30% [fourth-line] auto [end];
+}
+
+.recipeTitle {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.recipeSlides {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.recipeSpecs {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.recipeInstructions {
+  grid-column-start: 3;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.recipeIngredients {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.recipeFavorite {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}

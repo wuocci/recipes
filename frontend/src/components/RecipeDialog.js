@@ -10,7 +10,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 
-export default function AlertDialog() {
+
+const AlertDialog = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -26,6 +27,7 @@ export default function AlertDialog() {
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Open recipe
       </Button>
+      
       <Dialog
         open={open}
         onClose={handleClose}
@@ -33,24 +35,54 @@ export default function AlertDialog() {
         aria-describedby="alert-dialog-description"
         className="recipe-dialog"
       >
-        <DialogTitle id="alert-dialog-title">{"Recipe name by user user"}
-        <IconButton onClick={handleClose} color="primary">
-            <Close/>
-          </IconButton>
-        </DialogTitle>
-        <Divider/>
-        <DialogContent>
-          <DialogContentText id="recipe">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Add favourite
-          </Button>
-        </DialogActions>
+        
+          <DialogContent class="recipeDialogContent">
+          <div class="recipeContainer">
+            <DialogTitle class="recipeTitle" id="alert-dialog-title">{"Recipe name by user user"}
+              <IconButton onClick={handleClose} color="primary">
+                <Close />
+              </IconButton>
+            </DialogTitle>
+
+            <DialogContentText class="recipeSlides">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogContentText class="recipeSpecs">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogContentText class="recipeInstructions">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogContentText class="recipeIngredients">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogActions class="recipeFavorite" >
+              <Button onClick={handleClose} color="primary" autoFocus>
+                Add favourite
+              </Button>
+            </DialogActions>
+            </div>
+          </DialogContent>
+          
       </Dialog>
     </div>
   );
 }
+
+export default AlertDialog;

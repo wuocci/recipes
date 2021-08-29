@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
  *   },
  * ];
  */
-export default function TitlebarImageList() {
+const TitlebarImageList = () => {
   const classes = useStyles();
 
   return (
@@ -69,3 +69,5 @@ export default function TitlebarImageList() {
     </div>
   );
 }
+
+export default TitlebarImageList;
