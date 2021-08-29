@@ -6,7 +6,7 @@ const mongo = require('./config/db');
 
 mongo.connectToServer(function (err) {
 
-    const routes = require('./controllers/reciperoute');
+    const routes = require('./routes/reciperoute');
     const app = express();
     const port = process.env.PORT || 8080;
     app.use(cors({ origin: true, credentials: true }));
