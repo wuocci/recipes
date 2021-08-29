@@ -169,13 +169,4 @@ h1{
   grid-row-start: 4;
   grid-row-end: 4;
 }
-.recipe-grid{
-  flex-grow: 1;
-  height: 200px;
-}
 
-/* Divider CSS */
-.MuiDivider-root {
-  margin-left: 50% !important;
-  height: 75% !important;
-}
