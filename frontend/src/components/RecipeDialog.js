@@ -9,10 +9,9 @@ import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 
-export default function RecipeDialog({openDialog, toggleModal}){
-  console.log(openDialog)
-    
 
+const RecipeDialog = ({openDialog, toggleModal}) => {
+  console.log(openDialog)
   return (
     <div>
       <Dialog
@@ -22,6 +21,51 @@ export default function RecipeDialog({openDialog, toggleModal}){
         aria-describedby="alert-dialog-description"
         className="recipe-dialog"
       >
+        
+          <DialogContent class="recipeDialogContent">
+          <div class="recipeContainer">
+            <DialogTitle class="recipeTitle" id="alert-dialog-title">{"Recipe name by user user"}
+              <IconButton onClick={() => toggleModal(false)} color="primary">
+                <Close />
+              </IconButton>
+            </DialogTitle>
+
+            <DialogContentText class="recipeSlides">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogContentText class="recipeSpecs">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogContentText class="recipeInstructions">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogContentText class="recipeIngredients">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+
+            <DialogActions class="recipeFavorite" >
+              <Button color="primary" autoFocus>
+                Add favourite
+              </Button>
+            </DialogActions>
+            </div>
+          </DialogContent>
+          
         <DialogTitle id="alert-dialog-title">{"Recipe name by user user"}
         <IconButton onClick={() => toggleModal(false)} color="primary">
             <Close/>
@@ -43,3 +87,5 @@ export default function RecipeDialog({openDialog, toggleModal}){
     </div>
   );
 }
+
+export default RecipeDialog;
