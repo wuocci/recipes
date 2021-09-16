@@ -20,10 +20,10 @@ const LoginForm = () => {
         setPassWord(event.target.value);
     };
 
-    /* //simple login check for later authentication and stuff
+    //simple login check for later authentication and stuff
      const checkLogin = async (event) => {   
         event.preventDefault()
-        try {      
+       /* try {      
           const user = await recipeService.login({ username, password })
           recipeService.setToken(user.token)   
           window.localStorage.setItem(        
@@ -36,13 +36,13 @@ const LoginForm = () => {
           catch (exception) {   
             setTimeout(() => {          
           }, 5000)    
-          }
+          }*/
           setPassWord("")
           setUsername("")
-      }**/
+      }
 
     return (
-        <div className="login-form">
+        <form className="login-form" onSubmit={checkLogin}>
             {showError && 
             <Notification 
                 showError={showError}
@@ -65,11 +65,11 @@ const LoginForm = () => {
                 autoComplete="current-password"
                 variant="outlined"
             />
-            <Button variant="contained" color="primary" >
+            <Button variant="contained" color="primary" type="submit" >
                 Login
             </Button> 
             <p>Forgot <a href="">password?</a></p>
-        </div>
+        </form>
     );
   }
   

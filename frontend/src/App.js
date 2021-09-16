@@ -37,10 +37,10 @@ const App = () => {
           <Route exact path="/">
             <FrontPage />
           </Route>
-          <Route path="/LoginPage">
+          <Route path="/login">
             <LoginPage />
           </Route>
-          <Route path="/SignUpPage">
+          <Route path="/sign-up">
             <SignUpPage />
           </Route>
         </Switch>

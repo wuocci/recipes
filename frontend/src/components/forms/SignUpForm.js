@@ -5,25 +5,15 @@ import Notification from '../../Notification'
 
 
 const SignUpForm = () => {
-    const [username, setUsername] = useState(null)
-    const [password, setPassWord] = useState(null)
-    const [emailAddress, setEmail] = useState(null)
+    const [username, setUsername] = useState("")
+    const [password, setPassWord] = useState("")
+    const [emailAddress, setEmail] = useState("")
     const showError = useRef(false)
-
-    const handleUsername = (event) => {
-        setUsername(event.target.value);
-    };
-
-    const handlePassword = (event) => {
-        setPassWord(event.target.value);
-    };
-
-    const handleEmailAddress = (event) => {
-        setEmail(event.target.value);
-    }
+    
 
     //function for checking sign up data etc. for later usage.
-    const submitSignUp = () => {
+    const submitSignUp = (event) => {
+        event.preventDefault()
         if(username === null || password === null){ 
            console.log("invalid")
         }
@@ -32,10 +22,13 @@ const SignUpForm = () => {
             console.log(password)
             console.log(emailAddress)
         }
+        setUsername("")
+        setPassWord("")
+        setEmail("")
     }
 
     return(
-        <div className="sign-up-form">
+        <form className="sign-up-form" onSubmit={submitSignUp}>
             {showError && 
             <Notification 
                 showError={showError}
@@ -45,31 +38,34 @@ const SignUpForm = () => {
             }  
             <h1>Create Account</h1>
             <TextField
+                value={emailAddress}
                 required
-                onChange={handleEmailAddress}
+                onChange={(e) => setEmail(e.target.value)}
                 id="standard-email"
                 label="Email"
                 variant="outlined"
             />
             <TextField
+                value={username}
                 required
-                onChange={handleUsername}
+                onChange={(e) => setUsername(e.target.value)}
                 id="standard-username"
                 label="Username"
                 variant="outlined"
             />
             <TextField
+                value={password}
                 required
-                onChange={handlePassword}
+                onChange={(e) => setPassWord(e.target.value)}
                 id="outlined-password-input"
                 label="Password"
                 type="password"
                 variant="outlined"
             />
-            <Button variant="contained" color="primary" onClick={submitSignUp}>
+            <Button variant="contained" color="primary" type="submit">
                 Submit
             </Button> 
-        </div>
+        </form>
     )
 }
 

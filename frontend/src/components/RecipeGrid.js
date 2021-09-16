@@ -31,6 +31,8 @@ export default function RecipeGrid() {
         fetch("http://localhost:8080/recipes")
         .then(response => response.json())
         .then(data => setRecipes(data))
+        .catch(error => { throw (error);
+        })
       },[])
 
     //add loader until recipes are fetched

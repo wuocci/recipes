@@ -2,17 +2,14 @@ let mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();
 const Recipe = require('../models/Recipe');
-const mongo = require('../config/db');
-const db = mongo.getDb(); 
-
 
 // @route GET api/recipes/
 // @description Get all recipes
 // @access Public
 router.get('/', (req, res) => {
 	db.collection('recipe').find({}).toArray()
-	.then((users) => {
-    res.json(users);
+	.then((recipes) => {
+    res.json(recipes);
     });
 });
 
@@ -25,17 +22,18 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(404).json({ norecipefound: 'No recipe found' }));
 });
 
-/*
+
 // @route GET api/recipe
 // @description add/save recipe
 // @access Public
 router.post('/', (req, res) => {
-  db.collection('recipe').save(req.body, (err, result) => {
+  var myRecipe = new Recipe(req.body)
+  db.collection('recipe').save(myRecipe, (err, result) => {
     if (err) return console.log(err)
     })
     .then(recipe => res.json({ msg: 'Recipe added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this recipe' }));
-});*/
+});
 
 // @route GET api/recipe/:id
 // @description Update recipe

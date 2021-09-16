@@ -24,10 +24,10 @@ const ButtonAppBar = (props) => {
                             </Link>
                         </div>
                         <div className="appbar-buttons">
-                            <Link to="/LoginPage">
+                            <Link to="/login">
                                 <LogInButton />
                             </Link>
-                            <Link to="/SignUpPage">
+                            <Link to="/sign-up">
                                 <SignUpButton />
                             </Link>
                         </div>
