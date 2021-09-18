@@ -17,6 +17,7 @@ import recipeimg from '../img/pesto.jpg'
 export default function RecipeGrid() {
     const [recipes, setRecipes] = useState(null)
     const [openDialog, setDialog] = useState(false)
+    console.log(recipes)
 
     const openRecipe = () => {  
         setDialog(true)
@@ -28,9 +29,9 @@ export default function RecipeGrid() {
  
     //fetch recipes from mongodb
     useEffect(() => {
-        fetch("http://localhost:8080/recipes")
+        fetch("http://localhost:8080/api/recipes")
         .then(response => response.json())
-        .then(data => setRecipes(data))
+        .then(data =>  setRecipes(data))
         .catch(error => { throw (error);
         })
       },[])

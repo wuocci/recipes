@@ -1,9 +1,9 @@
 import './css/App.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import FrontPage from './pages/frontPage/FrontPage.js';
 import LoginPage from './pages/logInPage/LoginPage.js';
 import SignUpPage from './pages/signUpPage/SignUpPage.js';
-//import recipeService from './recipesservice.js' 
+import authService from './services/authservice' 
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,19 +12,16 @@ import {
 } from "react-router-dom";
 
 const App = () => {
-  const [user, setUser] = useState(null)
+  const user = useRef(null)
   const [recipes, setRecipes] = useState([])
 
 
 
   //get user data when page renders
   useEffect(() => {    
-    const loggedUserJSON = window.localStorage.getItem('loggedRecipeAppUser')    
-    if (loggedUserJSON) {      
-      const user = JSON.parse(loggedUserJSON)      
-      setUser(user)      
-      //recipeService.setToken(user.token)    
-    }  
+    const loggedUserJSON = authService.getCurrentUser();
+    user.current = loggedUserJSON
+    console.log(loggedUserJSON)
   }, 
   [])
 

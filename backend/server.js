@@ -8,15 +8,10 @@ const Role = db.role;
 const app = express();
 const port = process.env.PORT || 8080;
 
-
-const reciperoute = require('./routes/recipe_routes'); 
-const { connectToServer } = require('./config/db');
  
-var corsOptions = {
-    origin: "http://localhost:8080"
-};
+ 
 
-app.use(cors(corsOptions));
+app.use(cors())
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -29,7 +24,7 @@ app.use(express.json({ extended: false }));
 //Use routes
 require('./routes/auth_routes')(app);
 require('./routes/user_routes')(app); 
-app.use('/recipes', reciperoute)
+require("./routes/recipe_routes")(app);
 
 app.get('/', (req, res) => res.send('Hello world!'));
 
