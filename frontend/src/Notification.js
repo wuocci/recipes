@@ -1,15 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
-const Notification = ({errorMessage, type, showError}) => {
+const Notification = ({errorMessage, type, showNotification, setNotification}) => {
     const handleClose = () => {
-        showError.current = false
+        setNotification(!showNotification)
     }
 
     return (
         <div className="notification-banner">
-            <Snackbar open={showError.current} onClose={handleClose} autoHideDuration={600} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+            <Snackbar open={showNotification} onClose={handleClose} autoHideDuration={6000} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
                 <Alert variant="outlined" severity={type}>
                     {errorMessage}
                 </Alert>

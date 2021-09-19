@@ -9,9 +9,8 @@ import { useHistory } from "react-router-dom";
 const LoginForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassWord] = useState('')
-    const [user, setUser] = useState(null)
-    const showError = useRef(false)
     const [errorMessage, setMessage] = useState('')
+    const [showNotification, setNotification] = useState(false)
     const history = useHistory();
 
 
@@ -32,35 +31,40 @@ const LoginForm = () => {
                 window.location.reload();
             },
             (error) => {
+            setNotification(true)
               const resMessage =
                 (error.response &&
                   error.response.data &&
                   error.response.data.message) ||
                 error.message ||
                 error.toString();
-    
               setMessage(resMessage);
             }
-          );
+        );
+        setUsername("");
+        setPassWord("");
       }
 
     return (
         <form className="login-form" onSubmit={checkLogin}>
-            {showError && 
+            {showNotification && 
             <Notification 
-                showError={showError}
+                showNotification={showNotification}
+                setNotification={setNotification}
                 errorMessage={errorMessage}
                 type="error"
             /> 
             }  
             <h1>Login</h1>
             <TextField
+                value={username}
                 onChange={handleUsername}
                 id="standard-username"
                 label="Username"
                 variant="outlined"
             />
             <TextField
+                value={password}
                 onChange={handlePassword}
                 id="standard-password-input"
                 label="Password"
