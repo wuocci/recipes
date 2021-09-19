@@ -17,7 +17,6 @@ import recipeimg from '../img/pesto.jpg'
 export default function RecipeGrid() {
     const [recipes, setRecipes] = useState(null)
     const [openDialog, setDialog] = useState(false)
-    console.log(recipes)
 
     const openRecipe = () => {  
         setDialog(true)
@@ -26,7 +25,6 @@ export default function RecipeGrid() {
 
   const toggleModal = (val) => setDialog(val)
 
- 
     //fetch recipes from mongodb
     useEffect(() => {
         fetch("http://localhost:8080/api/recipes")
@@ -57,7 +55,9 @@ export default function RecipeGrid() {
                 {recipes.map((item) => (
                     <Grid item xs={2,3}>
                         <Card className="recipe-card">
-                        <CardActionArea>
+                        <CardActionArea
+                            onClick={openRecipe}
+                        >
                             <CardMedia
                             component="img"
                             alt="Picture of the recipe"
