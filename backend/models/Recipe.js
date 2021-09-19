@@ -1,50 +1,28 @@
-const mongoose = require('mongoose');
+module.exports = mongoose => {
+  var schema = mongoose.Schema(
+    {
+      title: String,
+      author: String,
+      description: String,
+      cooking_time: String,
+      servings: String,
+      ingredients: String,
+      instructions: String,
+      main_ingredient: String,
+      main_category: String,
+      meal_type: String,
+      keywords: Array,
+      images: Buffer
+    },
+    { timestamps: true }
+  );
 
-const recipeSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  author: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String
-  },
-  published_date: {
-    type: Date
-  },
-  cooking_time: {
-    type: String
-  },
-  servings: { 
-    type: String
-  },
-  ingredients: {
-    type: Array
-  },
-  instructions: {
-    type: Array
-  },
-  main_ingredient: {
-    type: String,
-    required: true
-  },
-  main_category: {
-    type: String,
-    required: true
-  },
-  meal_type: {
-    type: String,
-    required: true
-  },
-  keywords: {
-    type: Array
-  },
-  images: {
-    type: Buffer
-  },
-},{ collection : 'recipes' });
+  schema.method("toJSON", function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
 
-module.exports = mongoose.model('recipe', recipeSchema);
+  const Recipe = mongoose.model("recipe", schema);
+  return Recipe;
+};

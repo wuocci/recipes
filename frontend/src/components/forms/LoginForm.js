@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Notification from '../../Notification';
-//import recipeService from '../../services.js' 
+import authService from '../../services/authservice' 
+import { useHistory } from "react-router-dom";
 
 
 const LoginForm = () => {
@@ -10,6 +11,8 @@ const LoginForm = () => {
     const [password, setPassWord] = useState('')
     const [user, setUser] = useState(null)
     const showError = useRef(false)
+    const [errorMessage, setMessage] = useState('')
+    const history = useHistory();
 
 
     const handleUsername = (event) => {
@@ -20,33 +23,33 @@ const LoginForm = () => {
         setPassWord(event.target.value);
     };
 
-    /* //simple login check for later authentication and stuff
+    //simple login check for later authentication and stuff
      const checkLogin = async (event) => {   
         event.preventDefault()
-        try {      
-          const user = await recipeService.login({ username, password })
-          recipeService.setToken(user.token)   
-          window.localStorage.setItem(        
-            'loggedNoteappUser', JSON.stringify(user)      
-            ) 
-            setUser(user)    
-            setUsername('')      
-            setPassWord('')    
-          } 
-          catch (exception) {   
-            setTimeout(() => {          
-          }, 5000)    
-          }
-          setPassWord("")
-          setUsername("")
-      }**/
+        authService.login(username, password).then(
+            () => {
+                history.push("/");
+                window.location.reload();
+            },
+            (error) => {
+              const resMessage =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString();
+    
+              setMessage(resMessage);
+            }
+          );
+      }
 
     return (
-        <div className="login-form">
+        <form className="login-form" onSubmit={checkLogin}>
             {showError && 
             <Notification 
                 showError={showError}
-                errorMessage={"Invalid username or password"}
+                errorMessage={errorMessage}
                 type="error"
             /> 
             }  
@@ -65,11 +68,11 @@ const LoginForm = () => {
                 autoComplete="current-password"
                 variant="outlined"
             />
-            <Button variant="contained" color="primary" >
+            <Button variant="contained" color="primary" type="submit" >
                 Login
             </Button> 
             <p>Forgot <a href="">password?</a></p>
-        </div>
+        </form>
     );
   }
   
