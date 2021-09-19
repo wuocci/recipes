@@ -69,20 +69,25 @@ h1{
 
 /* APPBAR STUFF */
 
+.appbar-container{
+  display: flex !important;
+  justify-content: flex-start !important;
+  list-style: none !important;
+  width: 100%;
+  
+}
+
+.MuiButton-root {
+  padding-top:30px;
+}
+
 .MuiAppBar-root{
   background-color: #A7D2CB !important;
 }
 
 .appbar-logo{
-  margin-left: 45%;
+  margin: auto;
 }
-
-.appbar-buttons{
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-}
-
 /* SEARCHBAR STUFF */
 
 .search-bar{

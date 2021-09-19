@@ -16,7 +16,12 @@ const RecipeDialog = ({openDialog, toggleModal}) => {
     <div>
       <Dialog
         open={openDialog}
+        /*
+        Would need to be modified to detect if click occured in our out of the actual dialog.
+        I don't think it's necessary to have this alternate way of closing the dialog anyway.
+        
         onClick={() => toggleModal(false)}
+        */
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         className="recipe-dialog"
@@ -65,24 +70,7 @@ const RecipeDialog = ({openDialog, toggleModal}) => {
             </DialogActions>
             </div>
           </DialogContent>
-          
-        <DialogTitle id="alert-dialog-title">{"Recipe name by user user"}
-        <IconButton onClick={() => toggleModal(false)} color="primary">
-            <Close/>
-          </IconButton>
-        </DialogTitle>
-        <Divider/>
-        <DialogContent>
-          <DialogContentText id="recipe">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" autoFocus>
-            Add favourite
-          </Button>
-        </DialogActions>
+
       </Dialog>
     </div>
   );
