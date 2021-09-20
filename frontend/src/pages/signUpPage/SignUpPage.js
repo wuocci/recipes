@@ -1,23 +1,15 @@
 import React, { useRef, useState } from 'react';
-import logo from '../../img/logoRecipeBox.svg'
 import SignUpForm from '../../components/forms/SignUpForm';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import SuccessfulRegistration from './SuccessfulRegistration';
 
 
-const LoginPage = () => {
+const SignUpPage = () => {
     return (
-        <div className="login-page">
-            <Link to="/">
-                <img src={logo} alt="logo of the brand"></img>
-            </Link>
-            <SignUpForm />
+        <div className="sign-up-page">
+            <SignUpForm/>
+          { /*  <SuccessfulRegistration/> */ }
         </div>
     )
 }
 
-export default LoginPage;
+export default SignUpPage;
