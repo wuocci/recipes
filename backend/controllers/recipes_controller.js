@@ -13,6 +13,15 @@ exports.create = (req, res) => {
     const recipe = new Recipe({
       title: req.body.title,
       description: req.body.description,
+      cooking_time: req.body.cooking_time,
+      servings: req.body.servings,
+      ingredients: req.body.ingredients,
+      instructions: req.body.instructions,
+      main_ingredient: req.body.main_ingredient,
+      main_category: req.body.main_category,
+      meal_type: req.body.meal_type,
+      keywords: req.body.keywords,
+      images: req.body.images
     });
   
     // Save Tutorial in the database

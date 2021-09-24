@@ -1,21 +1,26 @@
-module.exports = mongoose => {
-  var schema = mongoose.Schema(
-    {
+const mongoose = require("mongoose");
+
+const Recipe = mongoose.model(
+  "Recipe",
+    new mongoose.Schema({
       title: String,
-      author: String,
       description: String,
       cooking_time: String,
       servings: String,
-      ingredients: String,
-      instructions: String,
+      ingredients: Array,
+      instructions: Array,
       main_ingredient: String,
       main_category: String,
       meal_type: String,
       keywords: Array,
-      images: Buffer
+      images: Buffer,
+      user: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User"
+        }
+      ]
     },
     { timestamps: true }
-  );
-  const Recipe = mongoose.model("recipe", schema);
-  return Recipe;
-};
+  ));
+  module.exports = Recipe;
