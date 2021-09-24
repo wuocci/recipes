@@ -6,7 +6,7 @@ import logo from '../../img/logoAppbar.svg';
 import LogInButton from './LogInButton';
 import AuthService from '../../services/authservice'
 import SignUpButton from './SignUpButton';
-import RecipeDialog from '../RecipeDialog';
+import AddNewRecipeDialog from '../AddNewRecipeDialog';
 import { useHistory } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -57,48 +57,51 @@ const ButtonAppBar = () => {
     if (openDialog === true) {
         return (
             <div>
-                <RecipeDialog openDialog={openDialog} toggleModal={toggleModal}/>
+                <AddNewRecipeDialog openDialog={openDialog} toggleModal={toggleModal} />
+                {/*
+                TODO: 
+                The appbar in this conditional render is purely for show. As it is in the background while the dialog is open, it's inaccessible, 
+                and thus having all this functionality here is just a waste of space. Clean away the functionality, and only leave the app bar's visuals.
+                */}
                 <div className="appbar">
-                <AppBar position="static">
-                    <Toolbar>
-
-                        {isProfilePage === null ?
-                            <div className="appbar-container">
-                                <div className="appbar-logo" style={{ marginLeft: "45%" }}>
-                                    <Link to="/">
-                                        <img src={logo} alt="logo of the brand"></img>
-                                    </Link>
-                                </div>
-                                <Link to="/login" style={{ paddingTop: "20px" }}>
-                                    <LogInButton />
-                                </Link>
-                                <Link to="/sign-up" style={{ paddingTop: "20px" }}>
-                                    <SignUpButton />
-                                </Link>
-                            </div>
-                            :
-                            <div className="appbar-container">
-                                <div>
-                                    <div>
-                                        <Button className="appbar-button2" style={{ padding: "30px" }} color="inherit" onClick={openRecipe}>Add a New Recipe</Button>
+                    <AppBar position="static">
+                        <Toolbar>
+                            {isProfilePage === null ?
+                                <div className="appbar-container">
+                                    <div className="appbar-logo" style={{ marginLeft: "45%" }}>
+                                        <Link to="/">
+                                            <img src={logo} alt="logo of the brand"></img>
+                                        </Link>
                                     </div>
-                                </div>
-                                <div className="appbar-logo">
-                                    <Link to="/">
-                                        <img src={logo} alt="logo of the brand"></img>
+                                    <Link to="/login" style={{ paddingTop: "20px" }}>
+                                        <LogInButton />
+                                    </Link>
+                                    <Link to="/sign-up" style={{ paddingTop: "20px" }}>
+                                        <SignUpButton />
                                     </Link>
                                 </div>
+                                :
+                                <div className="appbar-container">
+                                    <div>
+                                        <div>
+                                            <Button className="appbar-button2" style={{ padding: "30px" }} color="inherit" onClick={openRecipe}>Add a New Recipe</Button>
+                                        </div>
+                                    </div>
+                                    <div className="appbar-logo">
+                                        <Link to="/">
+                                            <img src={logo} alt="logo of the brand"></img>
+                                        </Link>
+                                    </div>
                                     <Link to="/">
                                         <Button className="appbar-button1" style={{ padding: "30px" }} color="inherit" onClick={handleLogOut}>Logout</Button>
                                     </Link>
-                            </div>
-                        }
-                    </Toolbar>
-                </AppBar>
+                                </div>
+                            }
+                        </Toolbar>
+                    </AppBar>
+                </div>
             </div>
-            </div>
-            
-            )
+        )
     } else {
         return (
             <div className="appbar">
