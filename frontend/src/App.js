@@ -4,6 +4,7 @@ import FrontPage from './pages/frontPage/FrontPage.js';
 import LoginPage from './pages/logInPage/LoginPage.js';
 import SignUpPage from './pages/signUpPage/SignUpPage.js';
 import authService from './services/authservice' 
+import SuccessfulRegistration from './pages/signUpPage/SuccessfulRegistration';
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/sign-up">
             <SignUpPage />
           </Route>
+          <Route path="/success" exact component = {SuccessfulRegistration} />
         </Switch>
       </div>
     </Router>

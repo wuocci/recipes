@@ -1,3 +1,5 @@
+
+
 /* FONT STUFF */
 
 
@@ -65,6 +67,23 @@ h1{
 .sign-up-form .MuiTextField-root{
   width: 250px;
   margin: 10px;
+}
+
+
+.sign-up-page-header img{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.sign-up-loader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sign-up-loader p{
+  margin-left: 10px;
 }
 
 /* APPBAR STUFF */
@@ -175,3 +194,63 @@ h1{
   grid-row-end: 4;
 }
 
+/* SUCCESSFULL REGISTRATION */
+
+.success-register{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.success-register-image{
+  width: 50%;
+  display: inherit;
+  flex-direction: column;
+  height: 100%;
+  background-color: #A7D2CB;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.success-register-content{
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+
+.success-register-content h1{
+  margin-top: -150px;
+  font-weight: 100;
+}
+
+.success-register-content p{
+  margin-top: 20px;
+}
+
+
+.success-register-content img{
+  height: 100px;
+}
+
+.recipe-img{
+  height: 50%;
+  width: 80%;
+}
+
+.recipe-logo{
+  width: 400px;
+}
+
+.success-register-buttons{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.success-register-buttons .MuiButton-root{
+  margin-top: 10px;
+  width: 250px !important;
+}
