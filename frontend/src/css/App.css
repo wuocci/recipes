@@ -120,6 +120,29 @@ h1{
   width: 50%;
 }
 
+/* Add new recipe dialog */
+
+.newRecipeSpecs1 {
+  display: flex;
+  flex-direction: row;
+}
+
+.newRecipeSpecs2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.newRecipeSpecs3 {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-inline {
+  display: flex;
+  flex-direction: row;
+}
+
+
 /* RECIPE GRID STUFF */
 
 .recipe-grid{
@@ -149,6 +172,7 @@ h1{
   margin: 10px;
   column-gap: 10px;
   grid-template-columns: repeat(4, 4fr);
+  /*TODO: Below line doesn't actually make the grid keep its size consistent, I don't think*/
   grid-template-rows: [first-line] 10% [second-line] 50% [third-line] 30% [fourth-line] auto [end];
 }
 

@@ -56,7 +56,7 @@ const SearchButton = () => {
 
 const AdvancedSearch = () => {
     const [advancedSearch, setAdvancedSearch] = useState(false);
-    const [value1, setValue1] = useState('food');
+    const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('');
 
