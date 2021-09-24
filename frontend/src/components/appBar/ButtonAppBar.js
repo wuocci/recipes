@@ -8,6 +8,11 @@ import AuthService from '../../services/authservice'
 import SignUpButton from './SignUpButton';
 import RecipeDialog from '../RecipeDialog';
 import { useHistory } from "react-router-dom";
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import IconButton from '@mui/material/IconButton';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+
 
 import {
     BrowserRouter as Router,
@@ -18,6 +23,7 @@ import {
 
 const ButtonAppBar = () => {
     const [openDialog, setDialog] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const openRecipe = () => {
         setDialog(true)
@@ -33,6 +39,20 @@ const ButtonAppBar = () => {
         history.push("/");
         window.location.reload();
     }
+
+    const handleProfile = () => {
+        history.push("/" + isProfilePage.id)
+    }
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    
+
     console.log(isProfilePage)
     if (openDialog === true) {
         return (
@@ -68,9 +88,9 @@ const ButtonAppBar = () => {
                                         <img src={logo} alt="logo of the brand"></img>
                                     </Link>
                                 </div>
-                                <Link to="/">
-                                    <Button className="appbar-button1" style={{ padding: "30px" }} color="inherit" onClick={handleLogOut}>Logout</Button>
-                                </Link>
+                                    <Link to="/">
+                                        <Button className="appbar-button1" style={{ padding: "30px" }} color="inherit" onClick={handleLogOut}>Logout</Button>
+                                    </Link>
                             </div>
                         }
                     </Toolbar>
@@ -111,9 +131,37 @@ const ButtonAppBar = () => {
                                         <img src={logo} alt="logo of the brand"></img>
                                     </Link>
                                 </div>
-                                <Link to="/">
-                                    <Button className="appbar-button1" style={{ padding: "30px" }} color="inherit" onClick={handleLogOut}>Logout</Button>
-                                </Link>
+                                    <IconButton
+                                        size="large"
+                                        aria-label="account of current user"
+                                        aria-controls="menu-appbar"
+                                        aria-haspopup="true"
+                                        onClick={handleMenu}
+                                        color="inherit"
+                                    >
+                                        <AccountCircle />
+                                    </IconButton>
+                                    <Menu
+                                        id="menu-appbar"
+                                        anchorEl={anchorEl}
+                                        anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                        }}
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleClose}
+                                    >
+                                        <MenuItem onClick={handleProfile}>Profile
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                                        <MenuItem onClick={handleLogOut}>Logout
+                                        </MenuItem>
+                                    </Menu>
                             </div>
                         }
                     </Toolbar>
