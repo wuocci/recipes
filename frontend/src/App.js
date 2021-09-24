@@ -11,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ProfilePage from './pages/profilePage/ProfilePage';
 
 const App = () => {
   const user = useRef(null)
@@ -20,13 +21,9 @@ const App = () => {
 
   //get user data when page renders
   useEffect(() => {    
-    const loggedUserJSON = authService.getCurrentUser();
-    user.current = loggedUserJSON
-    console.log(loggedUserJSON)
+    user.current = authService.getCurrentUser();
   }, 
   [])
-
-
 
   return (
     <Router>
@@ -42,6 +39,7 @@ const App = () => {
             <SignUpPage />
           </Route>
           <Route path="/success" exact component = {SuccessfulRegistration} />
+          <Route path="/:userId" exact component = {ProfilePage} />
         </Switch>
       </div>
     </Router>
