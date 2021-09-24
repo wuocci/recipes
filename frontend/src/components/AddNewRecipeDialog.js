@@ -17,10 +17,10 @@ import { TextField, Typography } from '@material-ui/core';
 
 
 const RecipeDialog = ({ openDialog, toggleModal }) => {
-    const [value1, setValue1] = useState('food');
+    const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('');
-    
+
     const handleChange1 = (event) => {
         setValue1(event.target.value);
     };
@@ -141,7 +141,7 @@ const IngredientList = () => {
                     <TextField name="Ingredient" onChange={e => handleChange(index, e)} />
                     {
                         index ?
-                            <IconButton onClick={() => removeFormFields(index)} color="primary" >
+                            <IconButton onClick={() => removeFormFields(index)} color="secondary" >
                                 <Close />
                             </IconButton>
                             : null
@@ -182,7 +182,7 @@ const InstructionStep = () => {
                     <TextField name="Instruction" onChange={e => handleChange(index, e)} />
                     {
                         index ?
-                            <IconButton onClick={() => removeFormFields(index)} color="primary" >
+                            <IconButton onClick={() => removeFormFields(index)} color="secondary" >
                                 <Close />
                             </IconButton>
                             : null
@@ -207,8 +207,12 @@ const MyDropzone = () => {
             <input {...getInputProps()} />
             {
                 isDragActive ?
-                    <p>Drop the files here ...</p> :
-                    <p>Drag 'n' drop some files here, or click to select files</p>
+                    <Typography>
+                        Drop the files here ...
+                    </Typography>:
+                    <Typography>
+                        Drag 'n' drop some files here, or click to select files
+                    </Typography>
             }
         </div>
     )
