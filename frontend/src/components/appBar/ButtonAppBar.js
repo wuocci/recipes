@@ -68,7 +68,7 @@ const ButtonAppBar = () => {
                         <Toolbar>
                             {isProfilePage === null ?
                                 <div className="appbar-container">
-                                    <div className="appbar-logo" style={{ marginLeft: "45%" }}>
+                                    <div className="appbar-logo">
                                         <Link to="/">
                                             <img src={logo} alt="logo of the brand"></img>
                                         </Link>
