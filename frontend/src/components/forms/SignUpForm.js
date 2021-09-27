@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Notification from '../../Notification'
 import { Typography } from '@material-ui/core';
 import authService from '../../services/authservice'
+import LoadingButton from '@mui/lab/LoadingButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -151,9 +152,9 @@ const SignUpForm = () => {
                     </Typography>
                 </div>
                 }
-                <Button variant="contained" color="primary" onClick={handleSubmit(submitSignUp)}>
+                <LoadingButton variant="contained" loadingIndicator="Loading..." loading={loading} color="primary" onClick={handleSubmit(submitSignUp)}>
                     Submit
-                </Button> 
+                </LoadingButton> 
             </div>
         </div>
         )

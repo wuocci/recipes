@@ -4,13 +4,14 @@ import Button from '@material-ui/core/Button';
 import Notification from '../../Notification';
 import authService from '../../services/authservice' 
 import { useHistory } from "react-router-dom";
-
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassWord] = useState('')
     const [errorMessage, setMessage] = useState('')
     const [showNotification, setNotification] = useState(false)
+    const [loading, setLoading] = useState(false);
     const history = useHistory();
 
 
@@ -23,7 +24,8 @@ const LoginForm = () => {
     };
 
     //simple login check for later authentication and stuff
-     const checkLogin = async (event) => {   
+     const checkLogin = async (event) => {  
+        setLoading(true)
         event.preventDefault()
         authService.login(username, password).then(
             () => {
@@ -39,6 +41,7 @@ const LoginForm = () => {
                 error.message ||
                 error.toString();
               setMessage(resMessage);
+              setLoading(false)
             }
         );
         setUsername("");
@@ -72,9 +75,9 @@ const LoginForm = () => {
                 autoComplete="current-password"
                 variant="outlined"
             />
-            <Button variant="contained" color="primary" type="submit" >
-                Login
-            </Button> 
+             <LoadingButton variant="contained" loadingIndicator="Logging in..." loading={loading} color="primary" onClick={checkLogin}>
+                    Submit
+                </LoadingButton> 
             <p>Forgot <a href="">password?</a></p>
         </form>
     );
