@@ -1,15 +1,12 @@
-import React, { useRef, useState } from 'react';
-import SignUpForm from '../../components/forms/SignUpForm';
-import SuccessfulRegistration from './SuccessfulRegistration';
-
+import React from "react";
+import SignUpForm from "../../components/forms/SignUpForm";
 
 const SignUpPage = () => {
-    return (
-        <div className="sign-up-page">
-            <SignUpForm/>
-          { /*  <SuccessfulRegistration/> */ }
-        </div>
-    )
-}
+  return (
+    <div className="sign-up-page">
+      <SignUpForm />
+    </div>
+  );
+};
 
 export default SignUpPage;
