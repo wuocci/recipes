@@ -17,21 +17,21 @@ import { TextField, Typography } from '@material-ui/core';
 
 
 const RecipeDialog = ({ openDialog, toggleModal }) => {
-    const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
+    const [category, setCategory] = useState('');
+    const [mainIngredient, setMainIngredient] = useState('');
+    const [mealType, setMealType] = useState('');
     const [keywords, setKeywords] = useState('');
     const [instructions, setInstructions] = useState([{ Instruction: "" }]);
     const [ingredients, setIngredients] = useState([{ Qty: "", Unit: "", Ingredient: "" }]);
 
-    const handleChange1 = (event) => {
-        setValue1(event.target.value);
+    const handleChangeCategory = (event) => {
+        setCategory(event.target.value);
     };
-    const handleChange2 = (event) => {
-        setValue2(event.target.value);
+    const handleChangeMainIngredient = (event) => {
+        setMainIngredient(event.target.value);
     };
-    const handleChange3 = (event) => {
-        setValue3(event.target.value);
+    const handleChangeMealType = (event) => {
+        setMealType(event.target.value);
     };
     const saveKeywords = (event) => {
         setKeywords(event.target.value);
@@ -69,21 +69,21 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
                                 <FormLabel component="legend">
                                     Main Category
                                 </FormLabel>
-                                <RadioGroup class="newRecipeSpecs1" aria-label="Main Category" name="fooDrink" value={value1} onChange={handleChange1}>
+                                <RadioGroup class="newRecipeSpecs1" aria-label="Main Category" name="fooDrink" value={category} onChange={handleChangeCategory}>
                                     <FormControlLabel value="Food" control={<Radio />} label="Food" />
                                     <FormControlLabel value="Drink" control={<Radio />} label="Drink" />
                                 </RadioGroup>
                                 <FormLabel component="legend">
                                     Main Ingredient
                                 </FormLabel>
-                                <RadioGroup class="newRecipeSpecs2" aria-label="Main Ingredient" name="ingredient" value={value2} onChange={handleChange2}>
+                                <RadioGroup class="newRecipeSpecs2" aria-label="Main Ingredient" name="ingredient" value={mainIngredient} onChange={handleChangeMainIngredient}>
                                     <FormControlLabel value="Vegetarian" control={<Radio />} label="Vegetarian" />
                                     <FormControlLabel value="Meat" control={<Radio />} label="Meat" />
                                 </RadioGroup>
                                 <FormLabel component="legend">
                                     Type of meal
                                 </FormLabel>
-                                <RadioGroup class="newRecipeSpecs3" aria-label="Type of meal" name="mealType" value={value3} onChange={handleChange3}>
+                                <RadioGroup class="newRecipeSpecs3" aria-label="Type of meal" name="mealType" value={mealType} onChange={handleChangeMealType}>
                                     <FormControlLabel value="Appetizer" control={<Radio />} label="Appetizer" />
                                     <FormControlLabel value="Meal" control={<Radio />} label="Meal" />
                                     <FormControlLabel value="Dessert" control={<Radio />} label="Dessert" />
