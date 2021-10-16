@@ -46,7 +46,6 @@ const ButtonAppBar = () => {
     setAnchorEl(null);
   };
 
-  console.log(isProfilePage);
   if (openDialog === true) {
     return (
       <div>

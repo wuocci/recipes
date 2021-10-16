@@ -1,16 +1,12 @@
-
-
 /* FONT STUFF */
 
-
-h1{
+h1 {
   font-weight: 300;
 }
 
-
 /* LOGIN PAGE STUFF */
 
-.login-form{
+.login-form {
   display: flex;
   flex-direction: column;
   width: 350px;
@@ -21,23 +17,23 @@ h1{
   border-radius: 10px;
 }
 
-.login-form p{
+.login-form p {
   font-size: 13px;
   margin-left: 200px;
 }
 
-.login-form .MuiButton-root{
+.login-form .MuiButton-root {
   margin-top: 20px;
   margin-bottom: 10px;
   width: 300px;
 }
 
-.login-form .MuiTextField-root{
+.login-form .MuiTextField-root {
   width: 250px;
   margin: 10px;
 }
 
-.login-page img{
+.login-page img {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -57,67 +53,64 @@ h1{
   border-radius: 10px;
 }
 
-
-.sign-up-form .MuiButton-root{
+.sign-up-form .MuiButton-root {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 300px;
 }
 
-.sign-up-form .MuiTextField-root{
+.sign-up-form .MuiTextField-root {
   width: 250px;
   margin: 10px;
 }
 
-
-.sign-up-page-header img{
+.sign-up-page-header img {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 }
 
-.sign-up-loader{
+.sign-up-loader {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.sign-up-loader p{
+.sign-up-loader p {
   margin-left: 10px;
 }
 
 /* APPBAR STUFF */
 
-.appbar-container{
+.appbar-container {
   display: flex !important;
   justify-content: flex-start !important;
   list-style: none !important;
   width: 100%;
-  
 }
 
 .MuiButton-root {
-  padding-top:30px;
+  padding-top: 30px;
 }
 
-.MuiAppBar-root{
-  background-color: #A7D2CB !important;
+.MuiAppBar-root {
+  background-color: #a7d2cb !important;
 }
 
-.appbar-logo{
+.appbar-logo {
   margin: auto;
   margin-left: 35%;
 }
 /* SEARCHBAR STUFF */
 
-.search-bar{
+.search-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.MuiAutocomplete-root{
+.MuiAutocomplete-root {
   width: 50%;
 }
 
@@ -143,10 +136,9 @@ h1{
   flex-direction: row;
 }
 
-
 /* RECIPE GRID STUFF */
 
-.recipe-grid{
+.recipe-grid {
   display: flex;
   width: 90%;
   align-items: center;
@@ -154,15 +146,15 @@ h1{
   margin-top: 50px;
 }
 
-.MuiDivider-root{
+.MuiDivider-root {
   margin-top: 15px !important;
 }
 
-.recipe-card{
+.recipe-card {
   height: 350px;
 }
 
-.MuiCardHeader-title{
+.MuiCardHeader-title {
   font-size: 22px !important;
 }
 
@@ -221,23 +213,23 @@ h1{
 
 /* SUCCESSFULL REGISTRATION */
 
-.success-register{
+.success-register {
   display: flex;
   flex-direction: row;
   height: 100vh;
 }
 
-.success-register-image{
+.success-register-image {
   width: 50%;
   display: inherit;
   flex-direction: column;
   height: 100%;
-  background-color: #A7D2CB;
+  background-color: #a7d2cb;
   justify-content: center !important;
   align-items: center !important;
 }
 
-.success-register-content{
+.success-register-content {
   display: inherit;
   flex-direction: column;
   justify-content: center;
@@ -245,42 +237,59 @@ h1{
   margin: 0 auto;
 }
 
-
-.success-register-content h1{
+.success-register-content h1 {
   margin-top: -150px;
   font-weight: 100;
 }
 
-.success-register-content p{
+.success-register-content p {
   margin-top: 20px;
 }
 
-
-.success-register-content img{
+.success-register-content img {
   height: 100px;
 }
 
-.recipe-img{
+.recipe-img {
   height: 50%;
   width: 80%;
 }
 
-.recipe-logo{
+.recipe-logo {
   width: 400px;
 }
 
-.success-register-buttons{
+.success-register-buttons {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
 
-.success-register-buttons .MuiButton-root{
+.success-register-buttons .MuiButton-root {
   margin-top: 10px;
   width: 250px !important;
 }
 
-.profile-info{
+.profile-info {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.profile-info .MuiTypography-h6 {
+  margin-left: 20px;
+  font-weight: 300;
+  margin-top: -5px;
+}
+
+.info {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: left !important;
+  margin-left: 20px;
+}
+
+.identicon {
+  border-radius: 50px !important;
 }
