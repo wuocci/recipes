@@ -17,19 +17,52 @@ import { TextField, Typography } from '@material-ui/core';
 
 
 const RecipeDialog = ({ openDialog, toggleModal }) => {
-    const [value1, setValue1] = useState('');
-    const [value2, setValue2] = useState('');
-    const [value3, setValue3] = useState('');
+    const [category, setCategory] = useState('');
+    const [mainIngredient, setMainIngredient] = useState('');
+    const [mealType, setMealType] = useState('');
+    const [keywords, setKeywords] = useState('');
+    const [instructions, setInstructions] = useState([{ Instruction: "" }]);
+    const [ingredients, setIngredients] = useState([{ Qty: "", Unit: "", Ingredient: "" }]);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
-    const handleChange1 = (event) => {
-        setValue1(event.target.value);
+    
+
+    const saveTitle = (event) => {
+        setTitle(event.target.value);
+    }
+    const saveDescription = (event) => {
+        setDescription(event.target.value);
+    } 
+    const handleChangeCategory = (event) => {
+        setCategory(event.target.value);
     };
-    const handleChange2 = (event) => {
-        setValue2(event.target.value);
+    const handleChangeMainIngredient = (event) => {
+        setMainIngredient(event.target.value);
     };
-    const handleChange3 = (event) => {
-        setValue3(event.target.value);
+    const handleChangeMealType = (event) => {
+        setMealType(event.target.value);
     };
+    const saveKeywords = (event) => {
+        setKeywords(event.target.value);
+    }
+    const addRecipe = () => {
+        const myRecipe = {
+            title: title,
+            description: description,
+            cooking_time: "",
+            servings: "",
+            ingredients: ingredients,
+            instructions: instructions,
+            main_ingredient: mainIngredient,
+            main_category: category,
+            meal_type: mealType,
+            keywords: keywords,
+        }
+        console.log(
+            myRecipe
+        )
+    }
     return (
         <div>
             <Dialog
@@ -46,38 +79,38 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
             >
 
                 <DialogContent class="recipeDialogContent">
-                    <div class="recipeContainer">
-                        <DialogTitle class="recipeTitle" id="alert-dialog-title">
-                            {"Recipe name by user user"}
+                    <div class="newRecipeContainer">
+                        <DialogTitle class="newRecipeTitle" id="alert-dialog-title">
+                            <TextField onChange={saveTitle} value={title} id="outlined-basic" label="Recipe Title" variant="outlined"/>
                             <IconButton onClick={() => toggleModal(false)} color="primary" >
                                 <Close />
                             </IconButton>
                         </DialogTitle>
 
-                        <DialogContentText class="recipeSlides">
+                        <DialogContentText class="newRecipeSlides">
                             <MyDropzone />
                         </DialogContentText>
 
-                        <DialogContentText class="recipeSpecs">
-                            <FormControl component="fieldset">
+                        <DialogContentText class="newRecipeSpecs">
+                            <FormControl required component="fieldset">
                                 <FormLabel component="legend">
                                     Main Category
                                 </FormLabel>
-                                <RadioGroup class="newRecipeSpecs1" aria-label="Main Category" name="fooDrink" value={value1} onChange={handleChange1}>
+                                <RadioGroup class="newRecipeSpecs1" aria-label="Main Category" name="fooDrink" value={category} onChange={handleChangeCategory}>
                                     <FormControlLabel value="Food" control={<Radio />} label="Food" />
                                     <FormControlLabel value="Drink" control={<Radio />} label="Drink" />
                                 </RadioGroup>
                                 <FormLabel component="legend">
                                     Main Ingredient
                                 </FormLabel>
-                                <RadioGroup class="newRecipeSpecs2" aria-label="Main Ingredient" name="ingredient" value={value2} onChange={handleChange2}>
+                                <RadioGroup class="newRecipeSpecs2" aria-label="Main Ingredient" name="ingredient" value={mainIngredient} onChange={handleChangeMainIngredient}>
                                     <FormControlLabel value="Vegetarian" control={<Radio />} label="Vegetarian" />
                                     <FormControlLabel value="Meat" control={<Radio />} label="Meat" />
                                 </RadioGroup>
                                 <FormLabel component="legend">
                                     Type of meal
                                 </FormLabel>
-                                <RadioGroup class="newRecipeSpecs3" aria-label="Type of meal" name="mealType" value={value3} onChange={handleChange3}>
+                                <RadioGroup class="newRecipeSpecs3" aria-label="Type of meal" name="mealType" value={mealType} onChange={handleChangeMealType}>
                                     <FormControlLabel value="Appetizer" control={<Radio />} label="Appetizer" />
                                     <FormControlLabel value="Meal" control={<Radio />} label="Meal" />
                                     <FormControlLabel value="Dessert" control={<Radio />} label="Dessert" />
@@ -85,21 +118,37 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
                             </FormControl>
                         </DialogContentText>
 
-                        <DialogContentText class="recipeInstructions">
-                            Instructions:
-                            <InstructionStep />
+                        <DialogContentText class="newRecipeKeywords">
+                            Keywords:
+                            <br/>
+                            <br/>
+                            <TextField id="outlined-basic" label="Input keywords separated by commas ( , )" variant="outlined" value={keywords} onChange={saveKeywords}/>
                         </DialogContentText>
 
-                        <DialogContentText class="recipeIngredients">
+                        <DialogContentText class="newRecipeInstructions">
+                            <Typography variant="h5">
+                                Instructions:
+                            </Typography>
+                            <InstructionStep setInstructions={setInstructions}/>
+                        </DialogContentText>
+
+                        <DialogContentText class="newRecipeDescription">
+                            <Typography variant="h5">
+                                Description:
+                            </Typography >
+                            <TextField id="outlined-basic" label="Describe the recipe" variant="outlined" value={description} onChange={saveDescription}/>
+                        </DialogContentText>
+
+                        <DialogContentText class="newRecipeIngredients">
                             <Typography variant="h5">
                                 Ingredients:
                             </Typography>
                             <br />
-                            <IngredientList />
+                            <IngredientList setIngredients={setIngredients}/>
                         </DialogContentText>
 
-                        <DialogActions class="recipeFavorite" >
-                            <Button color="primary" autoFocus>
+                        <DialogActions class="newRecipeAdd" >
+                            <Button color="primary" autoFocus variant="outlined" onClick={addRecipe}>
                                 Add recipe
                             </Button>
                         </DialogActions>
@@ -110,13 +159,14 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
     );
 }
 
-const IngredientList = () => {
+const IngredientList = (props) => {
     const [formValues, setFormValues] = useState([{ Qty: "", Unit: "", Ingredient: "" }])
 
     const handleChange = (i, e) => {
         const newFormValues = [...formValues];
         newFormValues[i][e.target.name] = e.target.value;
         setFormValues(newFormValues);
+        props.setIngredients(formValues);
     }
 
     const addFormFields = () => {
@@ -130,15 +180,15 @@ const IngredientList = () => {
     }
 
     return (
-        <FormControl>
+        <FormControl required>
             {formValues.map((element, index) => (
                 <div className="form-inline" key={index}>
                     <label>Qty</label>
-                    <TextField name="Qty" onChange={e => handleChange(index, e)} />
+                    <TextField variant="outlined" size="small" name="Qty" onChange={e => handleChange(index, e)} />
                     <label>Unit</label>
-                    <TextField name="Unit" onChange={e => handleChange(index, e)} />
+                    <TextField variant="outlined" size="small" name="Unit" onChange={e => handleChange(index, e)} />
                     <label>Ingredient</label>
-                    <TextField name="Ingredient" onChange={e => handleChange(index, e)} />
+                    <TextField variant="outlined" size="small" name="Ingredient" onChange={e => handleChange(index, e)} />
                     {
                         index ?
                             <IconButton onClick={() => removeFormFields(index)} color="secondary" >
@@ -155,13 +205,14 @@ const IngredientList = () => {
     )
 }
 
-const InstructionStep = () => {
-    const [formValues, setFormValues] = useState([{ Instruction: "" }])
+const InstructionStep = (props) => {
+    const [formValues, setFormValues] = useState([{ Instruction: "" }]);
 
     const handleChange = (i, e) => {
         const newFormValues = [...formValues];
-        newFormValues[i][e.target.Instruction] = e.target.value;
+        newFormValues[i][e.target.name] = e.target.value;
         setFormValues(newFormValues);
+        props.setInstructions(formValues);
     }
 
     const addFormFields = () => {
@@ -175,11 +226,11 @@ const InstructionStep = () => {
     }
 
     return (
-        <FormControl>
+        <FormControl required>
             {formValues.map((element, index) => (
                 <div className="form-inline" key={index}>
-                    <label>{index + 1}. </label>
-                    <TextField name="Instruction" onChange={e => handleChange(index, e)} />
+                    <label>{index + 1}.</label>
+                    <TextField variant="outlined" size="medium" name="Instruction" fullWidth onChange={e => handleChange(index, e)} />
                     {
                         index ?
                             <IconButton onClick={() => removeFormFields(index)} color="secondary" >
