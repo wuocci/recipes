@@ -114,28 +114,6 @@ h1 {
   width: 50%;
 }
 
-/* Add new recipe dialog */
-
-.newRecipeSpecs1 {
-  display: flex;
-  flex-direction: row;
-}
-
-.newRecipeSpecs2 {
-  display: flex;
-  flex-direction: row;
-}
-
-.newRecipeSpecs3 {
-  display: flex;
-  flex-direction: row;
-}
-
-.form-inline {
-  display: flex;
-  flex-direction: row;
-}
-
 /* RECIPE GRID STUFF */
 
 .recipe-grid {
@@ -156,6 +134,79 @@ h1 {
 
 .MuiCardHeader-title {
   font-size: 22px !important;
+}
+
+/* AddnewRecipeDialog CSS-Grid */
+
+.form-inline {
+  display: flex;
+  flex-direction: row;
+}
+
+.newRecipeContainer {
+  display: grid;
+  margin: 10px;
+  column-gap: 10px;
+  grid-template-columns: repeat(4, 4fr);
+  /*TODO: Below line doesn't actually make the grid keep its size consistent, I don't think*/
+  grid-template-rows: [first-line] 10% [second-line] 40% [third-line] 10% [fourth-line] 20% [fifth-line] auto [end];
+}
+
+.newRecipeTitle {
+  grid-column-start: 1;
+  grid-column-end: span 4;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.newRecipeSlides {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.newRecipeSpecs1 {
+  display: flex;
+  flex-direction: row;
+}
+
+.newRecipeSpecs2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.newRecipeSpecs3 {
+  display: flex;
+  flex-direction: row;
+}
+
+.newRecipeInstructions {
+  grid-column-start: 3;
+  grid-column-end: span 2;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.newRecipeKeywords {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
+.newRecipeIngredients {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+.newRecipeFavorite {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 5;
+  grid-row-end: 5;
 }
 
 /* Recipedialog CSS-Grid */

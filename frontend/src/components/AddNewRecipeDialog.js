@@ -20,6 +20,9 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
     const [value3, setValue3] = useState('');
+    const [keywords, setKeywords] = useState('');
+    const [instructions, setInstructions] = useState([{ Instruction: "" }]);
+    const [ingredients, setIngredients] = useState([{ Qty: "", Unit: "", Ingredient: "" }]);
 
     const handleChange1 = (event) => {
         setValue1(event.target.value);
@@ -30,6 +33,9 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
     const handleChange3 = (event) => {
         setValue3(event.target.value);
     };
+    const saveKeywords = (event) => {
+        setKeywords(event.target.value);
+    }
     return (
         <div>
             <Dialog
@@ -46,19 +52,19 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
             >
 
                 <DialogContent class="recipeDialogContent">
-                    <div class="recipeContainer">
-                        <DialogTitle class="recipeTitle" id="alert-dialog-title">
+                    <div class="newRecipeContainer">
+                        <DialogTitle class="newRecipeTitle" id="alert-dialog-title">
                             {"Recipe name by user user"}
                             <IconButton onClick={() => toggleModal(false)} color="primary" >
                                 <Close />
                             </IconButton>
                         </DialogTitle>
 
-                        <DialogContentText class="recipeSlides">
+                        <DialogContentText class="newRecipeSlides">
                             <MyDropzone />
                         </DialogContentText>
 
-                        <DialogContentText class="recipeSpecs">
+                        <DialogContentText class="newRecipeSpecs">
                             <FormControl component="fieldset">
                                 <FormLabel component="legend">
                                     Main Category
@@ -85,20 +91,27 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
                             </FormControl>
                         </DialogContentText>
 
-                        <DialogContentText class="recipeInstructions">
-                            Instructions:
-                            <InstructionStep />
+                        <DialogContentText class="newRecipeKeywords">
+                            Keywords:
+                            <br/>
+                            <br/>
+                            <TextField id="outlined-basic" label="Input keywords separated by commas ( , )" variant="outlined" value={keywords} onChange={saveKeywords}/>
                         </DialogContentText>
 
-                        <DialogContentText class="recipeIngredients">
+                        <DialogContentText class="newRecipeInstructions">
+                            Instructions:
+                            <InstructionStep setInstructions={setInstructions}/>
+                        </DialogContentText>
+
+                        <DialogContentText class="newRecipeIngredients">
                             <Typography variant="h5">
                                 Ingredients:
                             </Typography>
                             <br />
-                            <IngredientList />
+                            <IngredientList setIngredients={setIngredients}/>
                         </DialogContentText>
 
-                        <DialogActions class="recipeFavorite" >
+                        <DialogActions class="newRecipeFavorite" >
                             <Button color="primary" autoFocus>
                                 Add recipe
                             </Button>
@@ -110,13 +123,14 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
     );
 }
 
-const IngredientList = () => {
+const IngredientList = (props) => {
     const [formValues, setFormValues] = useState([{ Qty: "", Unit: "", Ingredient: "" }])
 
     const handleChange = (i, e) => {
         const newFormValues = [...formValues];
         newFormValues[i][e.target.name] = e.target.value;
         setFormValues(newFormValues);
+        props.setIngredients(formValues);
     }
 
     const addFormFields = () => {
@@ -155,13 +169,14 @@ const IngredientList = () => {
     )
 }
 
-const InstructionStep = () => {
+const InstructionStep = (props) => {
     const [formValues, setFormValues] = useState([{ Instruction: "" }])
 
     const handleChange = (i, e) => {
         const newFormValues = [...formValues];
         newFormValues[i][e.target.Instruction] = e.target.value;
         setFormValues(newFormValues);
+        props.setInstructions(formValues);
     }
 
     const addFormFields = () => {
