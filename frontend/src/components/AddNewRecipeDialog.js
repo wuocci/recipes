@@ -26,6 +26,8 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
+    
+
     const saveTitle = (event) => {
         setTitle(event.target.value);
     }
@@ -43,6 +45,23 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
     };
     const saveKeywords = (event) => {
         setKeywords(event.target.value);
+    }
+    const addRecipe = () => {
+        const myRecipe = {
+            title: title,
+            description: description,
+            cooking_time: "",
+            servings: "",
+            ingredients: ingredients,
+            instructions: instructions,
+            main_ingredient: mainIngredient,
+            main_category: category,
+            meal_type: mealType,
+            keywords: keywords,
+        }
+        console.log(
+            myRecipe
+        )
     }
     return (
         <div>
@@ -129,7 +148,7 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
                         </DialogContentText>
 
                         <DialogActions class="newRecipeAdd" >
-                            <Button color="primary" autoFocus variant="outlined">
+                            <Button color="primary" autoFocus variant="outlined" onClick={addRecipe}>
                                 Add recipe
                             </Button>
                         </DialogActions>
@@ -187,11 +206,11 @@ const IngredientList = (props) => {
 }
 
 const InstructionStep = (props) => {
-    const [formValues, setFormValues] = useState([{ Instruction: "" }])
+    const [formValues, setFormValues] = useState([{ Instruction: "" }]);
 
     const handleChange = (i, e) => {
         const newFormValues = [...formValues];
-        newFormValues[i][e.target.Instruction] = e.target.value;
+        newFormValues[i][e.target.name] = e.target.value;
         setFormValues(newFormValues);
         props.setInstructions(formValues);
     }
