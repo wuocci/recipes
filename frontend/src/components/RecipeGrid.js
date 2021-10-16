@@ -54,7 +54,7 @@ export default function RecipeGrid() {
                   />
                   <CardHeader
                     title={item.title}
-                    subheader={" by " + item.author}
+                    subheader={" by " + item.user[0].username}
                   />
                   <CardContent>
                     <Typography
