@@ -3,9 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
 import logo from "../../img/logoAppbar.svg";
-import LogInButton from "./LogInButton";
 import AuthService from "../../services/authservice";
-import SignUpButton from "./SignUpButton";
 import AddNewRecipeDialog from "../AddNewRecipeDialog";
 import { useHistory } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
@@ -66,10 +64,10 @@ const ButtonAppBar = () => {
                     </Link>
                   </div>
                   <Link to="/login" style={{ paddingTop: "20px" }}>
-                    <LogInButton />
+                    <Button variant="outlined">Login</Button>
                   </Link>
                   <Link to="/sign-up" style={{ paddingTop: "20px" }}>
-                    <SignUpButton />
+                    <Button variant="outlined">Sign Up</Button>
                   </Link>
                 </div>
               ) : (
@@ -121,10 +119,10 @@ const ButtonAppBar = () => {
                   </Link>
                 </div>
                 <Link to="/login" style={{ paddingTop: "20px" }}>
-                  <LogInButton />
+                  <Button variant="outlined">Login</Button>
                 </Link>
                 <Link to="/sign-up" style={{ paddingTop: "20px" }}>
-                  <SignUpButton />
+                  <Button variant="outlined">Sign Up</Button>
                 </Link>
               </div>
             ) : (
