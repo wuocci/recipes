@@ -39,6 +39,7 @@ export default function RecipeGrid() {
   } else if (openDialog === true) {
     return <RecipeDialog openDialog={openDialog} toggleModal={toggleModal} />;
   } else {
+    console.log(recipes);
     return (
       <div className="recipe-grid">
         <Grid container spacing={5}>
