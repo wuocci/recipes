@@ -67,7 +67,7 @@ const ButtonAppBar = () => {
                     <Button variant="outlined">Login</Button>
                   </Link>
                   <Link to="/sign-up" style={{ paddingTop: "20px" }}>
-                    <Button variant="outlined">Sign Up</Button>
+                    <Button variant="contained">Sign Up</Button>
                   </Link>
                 </div>
               ) : (
@@ -126,7 +126,9 @@ const ButtonAppBar = () => {
                   <Button variant="outlined">Login</Button>
                 </Link>
                 <Link to="/sign-up" style={{ paddingTop: "20px" }}>
-                  <Button variant="outlined">Sign Up</Button>
+                  <Button variant="contained" color="primary">
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
             ) : (
@@ -134,6 +136,7 @@ const ButtonAppBar = () => {
                 <div>
                   <div>
                     <Button
+                      variant="contained"
                       className="appbar-button2"
                       style={{ marginTop: "20px" }}
                       onClick={openRecipe}

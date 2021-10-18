@@ -84,14 +84,19 @@ h1 {
 
 .appbar-container .MuiButtonBase-root {
   flex-direction: column !important;
-  color: rgb(39, 39, 39);
   align-items: center;
+  margin-left: 5px !important;
 }
 
 .account-button {
   height: 40px !important;
   width: 100px;
   font-size: 16px !important;
+  color: #ffffff !important;
+}
+
+.account-button:hover {
+  background-color: #c76c5c65 !important;
 }
 
 .appbar-container {
@@ -102,9 +107,18 @@ h1 {
 }
 
 .MuiAppBar-root {
-  background-color: #a7d2cb !important;
+  background-color: #005247 !important;
 }
 
+.appbar-button2 {
+  background-color: #00a551 !important;
+  color: #ffffff !important;
+}
+
+.appbar-button2:hover {
+  background-color: #01803e !important;
+  color: #ffffff !important;
+}
 .appbar-logo {
   margin: auto;
   margin-left: 35%;

@@ -44,7 +44,6 @@ exports.findAll = (req, res) => {
   Recipe.find({})
     .then((data) => {
       res.json(data);
-      console.log(data);
     })
     .catch((err) => {
       res.status(500).send({
@@ -52,6 +51,7 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
 // Find a single Recipe with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -65,6 +65,23 @@ exports.findOne = (req, res) => {
       res
         .status(500)
         .send({ message: "Error retrieving Recipe with id=" + id });
+    });
+};
+
+exports.findByUser = (req, res) => {
+  const userId = req.params.userId;
+  Recipe.find({ "user.id": userId })
+    .then((data) => {
+      if (!data)
+        res
+          .status(404)
+          .send({ message: "Not found Recipes with user " + userId });
+      else res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Recipes with id=" + userId });
     });
 };
 
