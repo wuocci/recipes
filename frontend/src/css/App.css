@@ -252,7 +252,7 @@ h1 {
   column-gap: 10px;
   grid-template-columns: repeat(4, 4fr);
   /*TODO: Below line doesn't actually make the grid keep its size consistent, I don't think*/
-  grid-template-rows: [first-line] 10% [second-line] 50% [third-line] 30% [fourth-line] auto [end];
+  grid-template-rows: [first-line] 10% [second-line] 40% [third-line] 10% [fourth-line] 20% [fifth-line] auto [end];
 }
 
 .recipeTitle {
@@ -266,7 +266,7 @@ h1 {
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-end: 2;
 }
 
 .recipeSpecs {
@@ -283,18 +283,32 @@ h1 {
   grid-row-end: 4;
 }
 
-.recipeIngredients {
-  grid-column-start: 1;
+.recipeDescription {
+  grid-column-start: 3;
   grid-column-end: span 2;
-  grid-row-start: 3;
+  grid-row-start: 4;
   grid-row-end: 4;
 }
 
-.recipeFavorite {
+.recipeKeywords {
   grid-column-start: 1;
-  grid-column-end: 1;
+  grid-column-end: span 2;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
+.recipeIngredients {
+  grid-column-start: 1;
+  grid-column-end: span 2;
   grid-row-start: 4;
-  grid-row-end: 4;
+  grid-row-end: 5;
+}
+
+.recipeFavorite {
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 5;
+  grid-row-end: 5;
 }
 
 /* SUCCESSFULL REGISTRATION */

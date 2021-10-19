@@ -5,17 +5,16 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Divider from '@material-ui/core/Divider'
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Close from '@material-ui/icons/Close';
 
 
-const RecipeDialog = ({openDialog, toggleModal}) => {
+const RecipeDialog = ({openDialog, toggleModal, clickedRecipe}) => {
   console.log(openDialog)
   return (
     <div>
+      {console.log(clickedRecipe)}
       <Dialog
         open={openDialog}
         /*
@@ -31,39 +30,53 @@ const RecipeDialog = ({openDialog, toggleModal}) => {
         
           <DialogContent class="recipeDialogContent">
           <div class="recipeContainer">
-            <DialogTitle class="recipeTitle" id="alert-dialog-title">{"Recipe name by user user"}
+            <DialogTitle class="recipeTitle" id="alert-dialog-title">{clickedRecipe.title}
               <IconButton onClick={() => toggleModal(false)} color="primary">
                 <Close />
               </IconButton>
             </DialogTitle>
 
             <DialogContentText class="recipeSlides">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              Insert default image or image slideshow here
             </DialogContentText>
 
             <DialogContentText class="recipeSpecs">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              Main category: {clickedRecipe.main_category}
+              {<br/>}
+              Main Ingredient: {clickedRecipe.main_ingredient}
+              {<br/>}
+              Type of Meal: {clickedRecipe.meal_type}
+              {<br/>}
             </DialogContentText>
-
-            <DialogContentText class="recipeInstructions">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+            {
+              clickedRecipe.instructions.map((instruction, index) => (
+                <DialogContentText class="recipeInstructions">
+                  <Typography variant="h5">
+                    Instructions
+                  </Typography >
+                  {index +1}. {instruction.Instruction}
+                </DialogContentText>
+              ))
+            }
+            <DialogContentText class="recipeDescription">
+              {clickedRecipe.description}
             </DialogContentText>
-
-            <DialogContentText class="recipeIngredients">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+            <DialogContentText class="recipeKeywords">
+              Keywords: {clickedRecipe.keywords}
             </DialogContentText>
+              {
+                clickedRecipe.ingredients.map((ingredient) => (
+                  <DialogContentText class="recipeIngredients">
+                    <Typography variant="h5">
+                      Ingredients
+                    </Typography >
+                    {<br/>}
+                    <Typography>
+                    {ingredient.Qty} {ingredient.Unit} {ingredient.Ingredient}
+                    </Typography >
+                  </DialogContentText>
+                ))
+              }
 
             <DialogActions class="recipeFavorite" >
               <Button color="primary" autoFocus>

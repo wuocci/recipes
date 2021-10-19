@@ -16,9 +16,11 @@ import recipeservice from "../services/recipeservice";
 export default function RecipeGrid() {
   const [recipes, setRecipes] = useState(null);
   const [openDialog, setDialog] = useState(false);
+  const [clickedRecipe, setClickedRecipe] = useState();
 
-  const openRecipe = () => {
+  const openRecipe = (event) => {
     setDialog(true);
+    setClickedRecipe(event);
   };
 
   const toggleModal = (val) => setDialog(val);
@@ -37,7 +39,7 @@ export default function RecipeGrid() {
   if (recipes === null) {
     return <div>loading</div>;
   } else if (openDialog === true) {
-    return <RecipeDialog openDialog={openDialog} toggleModal={toggleModal} />;
+    return <RecipeDialog openDialog={openDialog} clickedRecipe={clickedRecipe} toggleModal={toggleModal} />;
   } else {
     console.log(recipes);
     return (
@@ -46,7 +48,7 @@ export default function RecipeGrid() {
           {recipes.map((item) => (
             <Grid item xs={(2, 3)}>
               <Card className="recipe-card">
-                <CardActionArea onClick={openRecipe}>
+                <CardActionArea onClick={() => openRecipe(item)}>
                   <CardMedia
                     component="img"
                     alt="Picture of the recipe"
