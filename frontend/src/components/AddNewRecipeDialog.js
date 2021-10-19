@@ -81,7 +81,7 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
                 <DialogContent class="recipeDialogContent">
                     <div class="newRecipeContainer">
                         <DialogTitle class="newRecipeTitle" id="alert-dialog-title">
-                            <TextField onChange={saveTitle} value={title} id="outlined-basic" label="Recipe Title" variant="outlined"/>
+                            <TextField required onChange={saveTitle} value={title} id="outlined-basic" label="Recipe Title" variant="outlined"/>
                             <IconButton onClick={() => toggleModal(false)} color="primary" >
                                 <Close />
                             </IconButton>
@@ -119,9 +119,9 @@ const RecipeDialog = ({ openDialog, toggleModal }) => {
                         </DialogContentText>
 
                         <DialogContentText class="newRecipeKeywords">
-                            Keywords:
-                            <br/>
-                            <br/>
+                            <Typography variant="h5">
+                                Keywords:
+                            </Typography>
                             <TextField id="outlined-basic" label="Input keywords separated by commas ( , )" variant="outlined" value={keywords} onChange={saveKeywords}/>
                         </DialogContentText>
 
@@ -199,6 +199,7 @@ const IngredientList = (props) => {
                 </div>
             ))}
             <div className="button-section">
+                <br/>
                 <Button onClick={() => addFormFields()}>Add new ingredient</Button>
             </div>
         </FormControl>
