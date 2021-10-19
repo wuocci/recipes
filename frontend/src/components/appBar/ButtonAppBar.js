@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AddIcon from "@mui/icons-material/Add";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import Identicon from "react-identicons";
 
 import { Link } from "react-router-dom";
 
@@ -98,7 +98,13 @@ const ButtonAppBar = () => {
                       aria-controls="menu-appbar"
                       aria-haspopup="true"
                       onClick={handleMenu}
-                      endIcon={<AccountCircle />}
+                      Icon={
+                        <Identicon
+                          string={isProfilePage.username}
+                          bg="#000000"
+                          size="30"
+                        />
+                      }
                     >
                       {isProfilePage.username}
                     </Button>
@@ -123,10 +129,16 @@ const ButtonAppBar = () => {
                   </Link>
                 </div>
                 <Link to="/login" style={{ paddingTop: "20px" }}>
-                  <Button variant="outlined">Login</Button>
+                  <Button className="login-button" variant="outlined">
+                    Login
+                  </Button>
                 </Link>
                 <Link to="/sign-up" style={{ paddingTop: "20px" }}>
-                  <Button variant="contained" color="primary">
+                  <Button
+                    className="signup-button"
+                    variant="contained"
+                    color="primary"
+                  >
                     Sign Up
                   </Button>
                 </Link>
@@ -137,7 +149,7 @@ const ButtonAppBar = () => {
                   <div>
                     <Button
                       variant="contained"
-                      className="appbar-button2"
+                      className="add-new-recipe-button"
                       style={{ marginTop: "20px" }}
                       onClick={openRecipe}
                       endIcon={<AddIcon />}
@@ -159,7 +171,13 @@ const ButtonAppBar = () => {
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleMenu}
-                  endIcon={<AccountCircle />}
+                  startIcon={
+                    <Identicon
+                      string={isProfilePage.username}
+                      bg="#000000"
+                      size="30"
+                    />
+                  }
                 >
                   {isProfilePage.username}
                 </Button>
