@@ -197,7 +197,6 @@ const ButtonAppBar = () => {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                 </Menu>
               </div>

@@ -7,14 +7,13 @@ import recipeservice from "../../services/recipeservice";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TabPanel from "./TabPanel";
+import { useHistory } from "react-router";
 
 const ProfileInfo = ({ userData }) => {
   const [userRecipes, setUserRecipes] = useState([]);
-  const [openDialog, setDialog] = useState(false);
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [favourite, isFavourite] = useState(false);
-
+  const history = useHistory();
   useEffect(() => {
     setLoading(true);
     //extract path id
@@ -28,15 +27,13 @@ const ProfileInfo = ({ userData }) => {
       });
   }, []);
 
-  const openRecipe = () => {
-    setDialog(true);
-  };
-
   setTimeout(() => {
     setLoading(false);
-  }, 1000);
+  }, 500);
 
-  const toggleModal = (val) => setDialog(val);
+  const handleSettings = () => {
+    history.push("/" + userData.id + "/settings");
+  };
 
   if (!loading && userData !== null) {
     return (
@@ -58,7 +55,12 @@ const ProfileInfo = ({ userData }) => {
               x favourites
             </Typography>
           </div>
-          <Button size="small" variant="outlined" color="primary">
+          <Button
+            onClick={handleSettings}
+            size="small"
+            variant="outlined"
+            color="primary"
+          >
             Edit profile
           </Button>
         </div>
