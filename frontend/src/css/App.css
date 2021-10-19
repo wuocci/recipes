@@ -88,6 +88,13 @@ h1 {
   margin-left: 5px !important;
 }
 
+.appbar-container {
+  display: flex !important;
+  justify-content: flex-start !important;
+  list-style: none !important;
+  width: 100%;
+}
+
 .account-button {
   height: 40px !important;
   width: 100px;
@@ -99,26 +106,29 @@ h1 {
   background-color: #c76c5c65 !important;
 }
 
-.appbar-container {
-  display: flex !important;
-  justify-content: flex-start !important;
-  list-style: none !important;
-  width: 100%;
-}
-
 .MuiAppBar-root {
   background-color: #005247 !important;
 }
 
-.appbar-button2 {
+.add-new-recipe-button {
   background-color: #00a551 !important;
   color: #ffffff !important;
 }
 
-.appbar-button2:hover {
+.add-new-recipe-button:hover {
   background-color: #01803e !important;
   color: #ffffff !important;
 }
+
+.login-button {
+  border: 0.5px solid #ffffff !important;
+  color: #ffffff !important;
+}
+
+.sign-up-button {
+  background-color: #008aff !important;
+}
+
 .appbar-logo {
   margin: auto;
   margin-left: 35%;
