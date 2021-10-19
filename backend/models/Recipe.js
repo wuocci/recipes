@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const Recipe = mongoose.model(
   "Recipe",
-    new mongoose.Schema({
+  new mongoose.Schema(
+    {
       title: String,
       description: String,
       cooking_time: String,
@@ -14,13 +15,9 @@ const Recipe = mongoose.model(
       meal_type: String,
       keywords: Array,
       images: Buffer,
-      user: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User"
-        }
-      ]
+      user: Array,
     },
     { timestamps: true }
-  ));
-  module.exports = Recipe;
+  )
+);
+module.exports = Recipe;

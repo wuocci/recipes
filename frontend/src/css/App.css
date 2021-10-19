@@ -82,6 +82,23 @@ h1 {
 
 /* APPBAR STUFF */
 
+.appbar-container .MuiButtonBase-root {
+  flex-direction: column !important;
+  align-items: center;
+  margin-left: 5px !important;
+}
+
+.account-button {
+  height: 40px !important;
+  width: 100px;
+  font-size: 16px !important;
+  color: #ffffff !important;
+}
+
+.account-button:hover {
+  background-color: #c76c5c65 !important;
+}
+
 .appbar-container {
   display: flex !important;
   justify-content: flex-start !important;
@@ -89,14 +106,19 @@ h1 {
   width: 100%;
 }
 
-.MuiButton-root {
-  padding-top: 30px;
-}
-
 .MuiAppBar-root {
-  background-color: #a7d2cb !important;
+  background-color: #005247 !important;
 }
 
+.appbar-button2 {
+  background-color: #00a551 !important;
+  color: #ffffff !important;
+}
+
+.appbar-button2:hover {
+  background-color: #01803e !important;
+  color: #ffffff !important;
+}
 .appbar-logo {
   margin: auto;
   margin-left: 35%;
@@ -126,10 +148,6 @@ h1 {
 
 .MuiDivider-root {
   margin-top: 15px !important;
-}
-
-.recipe-card {
-  height: 350px;
 }
 
 .MuiCardHeader-title {
@@ -328,17 +346,25 @@ h1 {
   width: 250px !important;
 }
 
+/** PROFILE PAGE **/
+
 .profile-info {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
   margin-left: 20px;
+  width: 100%;
 }
 
 .profile-info .MuiTypography-h6 {
   margin-left: 20px;
   font-weight: 300;
   margin-top: -5px;
+}
+
+.profile-info .MuiButtonBase-root {
+  height: 20px;
+  margin-left: 80% !important;
 }
 
 .info {
