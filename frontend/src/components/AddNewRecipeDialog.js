@@ -37,6 +37,11 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
   };
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);
+    
+  if (event.target.value=="Drink") {
+    setMainIngredient("");
+    setMealType("");
+  }
   };
   const handleChangeMainIngredient = (event) => {
     setMainIngredient(event.target.value);
@@ -104,7 +109,7 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
             </DialogContentText>
 
             <DialogContentText class="newRecipeSpecs">
-              <FormControl required component="fieldset">
+              <FormControl component="fieldset">
                 <FormLabel component="legend">Main Category</FormLabel>
                 <RadioGroup
                   class="newRecipeSpecs1"
@@ -131,15 +136,16 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
                   name="ingredient"
                   value={mainIngredient}
                   onChange={handleChangeMainIngredient}
+                  
                 >
                   <FormControlLabel
                     value="Vegetarian"
-                    control={<Radio />}
+                    control={<Radio disabled={category == "Drink"}/>}
                     label="Vegetarian"
                   />
                   <FormControlLabel
                     value="Meat"
-                    control={<Radio />}
+                    control={<Radio disabled={category == "Drink"}/>}
                     label="Meat"
                   />
                 </RadioGroup>
@@ -153,17 +159,17 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
                 >
                   <FormControlLabel
                     value="Appetizer"
-                    control={<Radio />}
+                    control={<Radio disabled={category == "Drink"}/>}
                     label="Appetizer"
                   />
                   <FormControlLabel
                     value="Meal"
-                    control={<Radio />}
+                    control={<Radio disabled={category == "Drink"}/>}
                     label="Meal"
                   />
                   <FormControlLabel
                     value="Dessert"
-                    control={<Radio />}
+                    control={<Radio disabled={category == "Drink"}/>}
                     label="Dessert"
                   />
                 </RadioGroup>
