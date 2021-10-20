@@ -244,6 +244,15 @@ h1 {
   grid-row-end: 5;
 }
 
+.favourite-button {
+  border: 1px solid orange !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: rgb(51, 51, 51) !important;
+  width: 10rem !important;
+  height: 3rem !important;
+}
+
 /* Recipedialog CSS-Grid */
 
 .recipeContainer {

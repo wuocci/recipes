@@ -111,4 +111,15 @@ exports.update = (req, res) => {
 };
 
 // Delete a Recipe with the specified id in the request
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  const recipeId = req.params.id;
+
+  Recipe.deleteOne({ _id: recipeId })
+    .then((data) => {
+      if (!data) res.status(404).send({ message: "Error deleting recipe!" });
+      else res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: "Error retrieving Recipe" });
+    });
+};

@@ -6,8 +6,8 @@ const getAll = async () => {
   const response = await request;
   return response.data;
 };
-const deleteRecipe = async (id, newObject) => {
-  const response = await axios.delete(`${baseUrl}/${id}`, newObject);
+const deleteRecipe = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id._id}`);
   return response.data;
 };
 

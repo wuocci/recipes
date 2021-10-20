@@ -19,7 +19,7 @@ module.exports = (app) => {
   router.put("/:id", Recipes.update);
 
   // Delete a Recipe with id
-  router.delete("recipe=/:id", Recipes.delete);
+  router.delete("/:id", Recipes.delete);
 
   app.use("/api/recipes", router);
 };

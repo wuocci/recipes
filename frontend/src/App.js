@@ -8,6 +8,7 @@ import SuccessfulRegistration from "./pages/signUpPage/SuccessfulRegistration";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import SettingsPage from "./pages/settingspage/SettingsPage";
+import RecipeDialog from "./components/RecipeDialog";
 
 const App = () => {
   const user = useRef(null);
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/success" exact component={SuccessfulRegistration} />
           <Route path="/:userId" exact component={ProfilePage} />
           <Route path="/:userId/settings" exact component={SettingsPage} />
+          <Route path="/recipes/:id" exact component={RecipeDialog} />
         </Switch>
       </div>
     </Router>

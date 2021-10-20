@@ -18,9 +18,9 @@ export default function RecipeGrid() {
   const [openDialog, setDialog] = useState(false);
   const [clickedRecipe, setClickedRecipe] = useState();
 
-  const openRecipe = (event) => {
+  const openRecipe = (item) => {
     setDialog(true);
-    setClickedRecipe(event);
+    setClickedRecipe(item);
   };
 
   const toggleModal = (val) => setDialog(val);
@@ -39,14 +39,19 @@ export default function RecipeGrid() {
   if (recipes === null) {
     return <div>loading</div>;
   } else if (openDialog === true) {
-    return <RecipeDialog openDialog={openDialog} clickedRecipe={clickedRecipe} toggleModal={toggleModal} />;
+    return (
+      <RecipeDialog
+        openDialog={openDialog}
+        clickedRecipe={clickedRecipe}
+        toggleModal={toggleModal}
+      ></RecipeDialog>
+    );
   } else {
-    console.log(recipes);
     return (
       <div className="recipe-grid">
         <Grid container spacing={5}>
           {recipes.map((item) => (
-            <Grid item xs={(2, 3)}>
+            <Grid item xs={2} key={item._id}>
               <Card className="recipe-card">
                 <CardActionArea onClick={() => openRecipe(item)}>
                   <CardMedia
@@ -68,12 +73,12 @@ export default function RecipeGrid() {
                       {item.description}
                     </Typography>
                   </CardContent>
-                  <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                  </CardActions>
                 </CardActionArea>
+                <CardActions disableSpacing>
+                  <IconButton aria-label="add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                </CardActions>
               </Card>
             </Grid>
           ))}

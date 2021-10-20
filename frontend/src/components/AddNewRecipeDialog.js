@@ -16,8 +16,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { TextField, Typography } from "@material-ui/core";
 import recipeservice from "../services/recipeservice";
 import authService from "../services/authservice";
+import { useHistory } from "react-router";
 
 const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
+  const history = useHistory();
   const [category, setCategory] = useState("");
   const [mainIngredient, setMainIngredient] = useState("");
   const [mealType, setMealType] = useState("");
@@ -37,11 +39,11 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
   };
   const handleChangeCategory = (event) => {
     setCategory(event.target.value);
-    
-  if (event.target.value=="Drink") {
-    setMainIngredient("");
-    setMealType("");
-  }
+
+    if (event.target.value == "Drink") {
+      setMainIngredient("");
+      setMealType("");
+    }
   };
   const handleChangeMainIngredient = (event) => {
     setMainIngredient(event.target.value);
@@ -73,7 +75,7 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
     recipeservice.postNewRecipe(myRecipe);
     console.log(myRecipe);
     toggleModal(false);
-    window.location.reload();
+    history.push("/" + getUser.id);
   };
   return (
     <div>
@@ -136,16 +138,15 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
                   name="ingredient"
                   value={mainIngredient}
                   onChange={handleChangeMainIngredient}
-                  
                 >
                   <FormControlLabel
                     value="Vegetarian"
-                    control={<Radio disabled={category == "Drink"}/>}
+                    control={<Radio disabled={category == "Drink"} />}
                     label="Vegetarian"
                   />
                   <FormControlLabel
                     value="Meat"
-                    control={<Radio disabled={category == "Drink"}/>}
+                    control={<Radio disabled={category == "Drink"} />}
                     label="Meat"
                   />
                 </RadioGroup>
@@ -159,17 +160,17 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
                 >
                   <FormControlLabel
                     value="Appetizer"
-                    control={<Radio disabled={category == "Drink"}/>}
+                    control={<Radio disabled={category == "Drink"} />}
                     label="Appetizer"
                   />
                   <FormControlLabel
                     value="Meal"
-                    control={<Radio disabled={category == "Drink"}/>}
+                    control={<Radio disabled={category == "Drink"} />}
                     label="Meal"
                   />
                   <FormControlLabel
                     value="Dessert"
-                    control={<Radio disabled={category == "Drink"}/>}
+                    control={<Radio disabled={category == "Drink"} />}
                     label="Dessert"
                   />
                 </RadioGroup>

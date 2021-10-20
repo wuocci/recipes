@@ -29,7 +29,7 @@ const ProfileInfo = ({ userData }) => {
 
   setTimeout(() => {
     setLoading(false);
-  }, 500);
+  }, 1000);
 
   const handleSettings = () => {
     history.push("/" + userData.id + "/settings");
