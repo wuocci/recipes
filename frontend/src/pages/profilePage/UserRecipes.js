@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecipeDialog from "../../components/RecipeDialog";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -11,11 +11,33 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import recipeimg from "../../img/pesto.jpg";
 import IconButton from "@material-ui/core/IconButton";
 import { Typography } from "@material-ui/core";
+import recipeservice from "../../services/recipeservice";
+import { useLocation } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
 
-const UserRecipes = ({ userRecipes }) => {
+const UserRecipes = ({ userData }) => {
+  const [userRecipes, setUserRecipes] = useState([]);
   const [clickedRecipe, setClickedRecipe] = useState();
-  console.log(userRecipes);
   const [openDialog, setDialog] = useState(false);
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    //extract path id
+    const pathWithSlash = location.pathname;
+    const id = pathWithSlash.slice(1);
+    recipeservice
+      .getRecipesByUser(id)
+      .then((data) => setUserRecipes(data))
+      .catch((error) => {
+        throw error;
+      });
+  }, []);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
 
   const openRecipe = (item) => {
     setClickedRecipe(item);
@@ -24,17 +46,16 @@ const UserRecipes = ({ userRecipes }) => {
 
   const toggleModal = (val) => setDialog(val);
 
-  if (openDialog === true) {
-    return (
-      <RecipeDialog
-        openDialog={openDialog}
-        clickedRecipe={clickedRecipe}
-        toggleModal={toggleModal}
-      ></RecipeDialog>
-    );
-  } else {
+  if (!loading) {
     return (
       <div className="user-recipes-grid">
+        {openDialog && (
+          <RecipeDialog
+            openDialog={openDialog}
+            clickedRecipe={clickedRecipe}
+            toggleModal={toggleModal}
+          ></RecipeDialog>
+        )}
         <Grid container spacing={5}>
           {userRecipes.map((item) => (
             <Grid item xs={2}>
@@ -69,6 +90,12 @@ const UserRecipes = ({ userRecipes }) => {
             </Grid>
           ))}
         </Grid>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <CircularProgress />
       </div>
     );
   }

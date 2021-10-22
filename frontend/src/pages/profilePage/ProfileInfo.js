@@ -29,7 +29,7 @@ const ProfileInfo = ({ userData }) => {
 
   setTimeout(() => {
     setLoading(false);
-  }, 1000);
+  }, 50);
 
   const handleSettings = () => {
     history.push("/" + userData.id + "/settings");
@@ -65,7 +65,7 @@ const ProfileInfo = ({ userData }) => {
           </Button>
         </div>
         <Divider />
-        <TabPanel userRecipes={userRecipes} />
+        <TabPanel userData={userData} />
       </div>
     );
   } else {

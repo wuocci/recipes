@@ -12,6 +12,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import recipeimg from "../img/pesto.jpg";
 import recipeservice from "../services/recipeservice";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function RecipeGrid() {
   const [recipes, setRecipes] = useState(null);
@@ -37,7 +38,11 @@ export default function RecipeGrid() {
 
   //add loader until recipes are fetched
   if (recipes === null) {
-    return <div>loading</div>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   } else if (openDialog === true) {
     return (
       <RecipeDialog

@@ -31,6 +31,16 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const handleChangeMainIngredient = (event) => {
+    setMainIngredient(event.target.value);
+  };
+  const handleChangeMealType = (event) => {
+    setMealType(event.target.value);
+  };
+  const saveKeywords = (event) => {
+    setKeywords(event.target.value);
+  };
+
   const saveTitle = (event) => {
     setTitle(event.target.value);
   };
@@ -44,15 +54,6 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
       setMainIngredient("");
       setMealType("");
     }
-  };
-  const handleChangeMainIngredient = (event) => {
-    setMainIngredient(event.target.value);
-  };
-  const handleChangeMealType = (event) => {
-    setMealType(event.target.value);
-  };
-  const saveKeywords = (event) => {
-    setKeywords(event.target.value);
   };
 
   const addRecipe = () => {
@@ -80,6 +81,7 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
   return (
     <div>
       <Dialog
+        fullScreen
         open={openDialog}
         /*
                 Would need to be modified to detect if click occured in our out of the actual dialog.
