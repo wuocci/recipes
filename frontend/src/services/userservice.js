@@ -20,11 +20,11 @@ const getAdminBoard = () => {
   return axios.get(API_URL + "admin", { headers: authHeader() });
 };
 
-/*const addFavourite = async (id, newObject) => {
-  const request = axios.put(`${BASE_URL}/${id}`, newObject);
+const addFavourite = async (id, recipe) => {
+  const request = axios.put(`${BASE_URL}${id}`, recipe);
   const response = await request;
   return response.data;
-};*/
+};
 
 export default {
   addFavourite,

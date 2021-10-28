@@ -34,7 +34,6 @@ const App = () => {
           <Route path="/success" exact component={SuccessfulRegistration} />
           <Route path="/:userId" exact component={ProfilePage} />
           <Route path="/:userId/settings" exact component={SettingsPage} />
-          <Route path="/recipes/:id" exact component={RecipeDialog} />
         </Switch>
       </div>
     </Router>

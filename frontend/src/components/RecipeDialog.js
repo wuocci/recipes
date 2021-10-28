@@ -17,6 +17,7 @@ import recipeservice from "../services/recipeservice";
 import authservice from "../services/authservice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Notification from "../Notification";
+import userservice from "../services/userservice";
 
 const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
   // const [showNotification, setNotification] = useState(false);
@@ -26,10 +27,11 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
   const [openVerify, setVerify] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   useEffect(() => {
     setLoading(false);
     setUser(authservice.getCurrentUser());
-  }, [clickedRecipe]);
+  }, []);
 
   setTimeout(() => {
     setLoading(false);
@@ -39,6 +41,10 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
       }
     }
   }, 50);
+
+  const addToFavourites = () => {
+    console.log(userservice.addFavourite(user.id, clickedRecipe));
+  };
 
   const handleDelete = () => {
     const confirm = window.confirm(
@@ -108,14 +114,14 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
               </DialogContentText>
 
               <DialogContentText class="recipeInstructions">
-                  <Typography variant="h5" component="p">
-                    Instructions
-                  </Typography>
-              {clickedRecipe.instructions.map((instruction, index) => (
-                <Typography>
-                  {index + 1}. {instruction.Instruction}
+                <Typography variant="h5" component="p">
+                  Instructions
                 </Typography>
-              ))}
+                {clickedRecipe.instructions.map((instruction, index) => (
+                  <Typography>
+                    {index + 1}. {instruction.Instruction}
+                  </Typography>
+                ))}
               </DialogContentText>
 
               <DialogContentText class="recipeDescription">
@@ -126,17 +132,18 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
               </DialogContentText>
 
               <DialogContentText class="recipeIngredients">
-                  <Typography variant="h5">Ingredients</Typography>
-                  {<br />}
-              {clickedRecipe.ingredients.map((ingredient) => (
+                <Typography variant="h5">Ingredients</Typography>
+                {<br />}
+                {clickedRecipe.ingredients.map((ingredient) => (
                   <Typography>
                     {ingredient.Qty} {ingredient.Unit} {ingredient.Ingredient}
                   </Typography>
-              ))}
+                ))}
               </DialogContentText>
 
               <DialogActions class="recipeFavorite">
                 <Button
+                  onClick={() => addToFavourites()}
                   size="small"
                   className="favourite-button"
                   variant="outlined"

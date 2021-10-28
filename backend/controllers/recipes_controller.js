@@ -99,13 +99,13 @@ exports.update = (req, res) => {
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`,
+          message: `Cannot update Recipe with id=${id}. Maybe Recipe was not found!`,
         });
-      } else res.send({ message: "Tutorial was updated successfully." });
+      } else res.send({ message: "Recipe was updated successfully." });
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + id,
+        message: "Error updating Recipe with id=" + id,
       });
     });
 };

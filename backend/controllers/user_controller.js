@@ -17,8 +17,11 @@ exports.moderatorBoard = (req, res) => {
   res.status(200).send("Moderator Content.");
 };
 
-/*exports.updateRecord = (req, res) => {
-  User.updateOne({ _id: ObjectId(req,body.id) },
-  { $push: { favourites: { ObjectId: "5e1352793e9e6a804448db0e" } } }
-)
-};*/
+exports.addToFavourites = (id, req) => {
+  const userId = id.params.id;
+  const addThisToFavourites = { $push: { favourites: id.body._id } };
+  User.updateOne({ _id: userId }, addThisToFavourites, function (err, res) {
+    if (err) throw err;
+    console.log("1 document updated");
+  });
+};

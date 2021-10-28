@@ -1,6 +1,5 @@
 const { authJwt } = require("../middlewares");
 const controller = require("../controllers/user_controller");
-const Users = require("../controllers/user_controller.js");
 
 var router = require("express").Router();
 
@@ -12,6 +11,8 @@ module.exports = function (app) {
     );
     next();
   });
+
+  router.put("/:id", controller.addToFavourites);
 
   app.get("/api/test/all", controller.allAccess);
 
@@ -28,4 +29,6 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+
+  app.use("/api/recipes", router);
 };

@@ -13,11 +13,14 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import recipeimg from "../img/pesto.jpg";
 import recipeservice from "../services/recipeservice";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 export default function RecipeGrid() {
   const [recipes, setRecipes] = useState(null);
   const [openDialog, setDialog] = useState(false);
   const [clickedRecipe, setClickedRecipe] = useState();
+
+  let location = useLocation();
 
   const openRecipe = (item) => {
     setDialog(true);
