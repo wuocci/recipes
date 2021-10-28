@@ -106,29 +106,34 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
                 Type of Meal: {clickedRecipe.meal_type}
                 {<br />}
               </DialogContentText>
-              {clickedRecipe.instructions.map((instruction, index) => (
-                <DialogContentText class="recipeInstructions">
+
+              <DialogContentText class="recipeInstructions">
                   <Typography variant="h5" component="p">
                     Instructions
                   </Typography>
+              {clickedRecipe.instructions.map((instruction, index) => (
+                <Typography>
                   {index + 1}. {instruction.Instruction}
-                </DialogContentText>
+                </Typography>
               ))}
+              </DialogContentText>
+
               <DialogContentText class="recipeDescription">
                 {clickedRecipe.description}
               </DialogContentText>
               <DialogContentText class="recipeKeywords">
                 Keywords: {clickedRecipe.keywords}
               </DialogContentText>
-              {clickedRecipe.ingredients.map((ingredient) => (
-                <DialogContentText class="recipeIngredients">
+
+              <DialogContentText class="recipeIngredients">
                   <Typography variant="h5">Ingredients</Typography>
                   {<br />}
+              {clickedRecipe.ingredients.map((ingredient) => (
                   <Typography>
                     {ingredient.Qty} {ingredient.Unit} {ingredient.Ingredient}
                   </Typography>
-                </DialogContentText>
               ))}
+              </DialogContentText>
 
               <DialogActions class="recipeFavorite">
                 <Button
