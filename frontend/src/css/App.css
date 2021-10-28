@@ -302,15 +302,15 @@ h1 {
 .recipeKeywords {
   grid-column-start: 1;
   grid-column-end: span 2;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
 }
 
 .recipeIngredients {
   grid-column-start: 1;
   grid-column-end: span 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
 
 .recipeFavorite {

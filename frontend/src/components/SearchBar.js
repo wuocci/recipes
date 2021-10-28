@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Box from '@material-ui/core/Box';
@@ -13,8 +13,10 @@ import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import recipeservice from "../services/recipeservice";
+import CircularProgress from "@mui/material/CircularProgress";
 
-
+/*
 const SearchBar = () => {
 
     const top10recipes = [
@@ -29,7 +31,7 @@ const SearchBar = () => {
             freeSolo
             options={top10recipes.map(option => option.title)}
             renderInput={params => (
-                <TextField {...params} label="Search recipes..." margin="normal" variant="outlined" 
+                <TextField {...params} label="Search recipes..." margin="normal" variant="outlined" type="search" 
                 InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -44,6 +46,37 @@ const SearchBar = () => {
         <AdvancedSearch />
     </div>
     );
+}
+*/
+
+const SearchBar = () => {
+    const [recipes, setRecipes] = useState(null);
+    //fetch recipes from mongodb
+    useEffect(() => {
+        recipeservice
+            .getAll()
+            .then((data) => setRecipes(data))
+            .catch((error) => {
+                throw error;
+            });
+    }, []);
+    
+  //add loader until recipes are fetched
+  if (recipes === null) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+    } else {
+        return(
+            <div className="search-bar">
+
+                <SearchButton />
+                <AdvancedSearch />
+            </div>
+        )
+    }
 }
 
 const SearchButton = () => {
@@ -73,10 +106,10 @@ const AdvancedSearch = () => {
     if (!advancedSearch) {
         return (
             <div className="advanced-search-closed">
-                <Button className="AdvancedSearchButtonClosed" onClick={() => setAdvancedSearch(!advancedSearch)} 
-                        color="inherit"
-                        endIcon={<ArrowDropDownIcon>send</ArrowDropDownIcon>}
-                        >
+                <Button className="AdvancedSearchButtonClosed" onClick={() => setAdvancedSearch(!advancedSearch)}
+                    color="inherit"
+                    endIcon={<ArrowDropDownIcon>send</ArrowDropDownIcon>}
+                >
                     Advanced Search
                 </Button>
             </div>
@@ -84,35 +117,35 @@ const AdvancedSearch = () => {
     } else {
         return (
             <div className="advanced-search-open">
-                <Button onClick={() => setAdvancedSearch(!advancedSearch)} 
-                        color="inherit"
-                        endIcon={<ArrowDropUpIcon>send</ArrowDropUpIcon>}
-                        >
+                <Button onClick={() => setAdvancedSearch(!advancedSearch)}
+                    color="inherit"
+                    endIcon={<ArrowDropUpIcon>send</ArrowDropUpIcon>}
+                >
                     Advanced Search
                 </Button>
                 <div className="advanced-open-filters">
-                <Typography component="div" variant="body1"> 
-                    <Box display="flex" flexDirection="row">
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">Main Category</FormLabel>
-                            <RadioGroup aria-label="Main Category" name="fooDrink" value={value1} onChange={handleChange1}>
-                                <FormControlLabel value="Food" control={<Radio />} label="Food" />
-                                <FormControlLabel value="Drink" control={<Radio />} label="Drink" />
-                            </RadioGroup>
-                            <FormLabel component="legend">Main Ingredient</FormLabel>
-                            <RadioGroup aria-label="Main Ingredient" name="ingredient" value={value2} onChange={handleChange2}>
-                                <FormControlLabel value="Vegetarian" control={<Radio />} label="Vegetarian" />
-                                <FormControlLabel value="Meat" control={<Radio />} label="Meat" />
-                            </RadioGroup>
-                            <FormLabel component="legend">Type of meal</FormLabel>
-                            <RadioGroup aria-label="Type of meal" name="mealType" value={value3} onChange={handleChange3}>
-                                <FormControlLabel value="Appetizer" control={<Radio />} label="Appetizer" />
-                                <FormControlLabel value="Meal" control={<Radio />} label="Meal" />
-                                <FormControlLabel value="Dessert" control={<Radio />} label="Dessert" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Box>
-                </Typography>
+                    <Typography component="div" variant="body1">
+                        <Box display="flex" flexDirection="row">
+                            <FormControl component="fieldset">
+                                <FormLabel component="legend">Main Category</FormLabel>
+                                <RadioGroup aria-label="Main Category" name="fooDrink" value={value1} onChange={handleChange1}>
+                                    <FormControlLabel value="Food" control={<Radio />} label="Food" />
+                                    <FormControlLabel value="Drink" control={<Radio />} label="Drink" />
+                                </RadioGroup>
+                                <FormLabel component="legend">Main Ingredient</FormLabel>
+                                <RadioGroup aria-label="Main Ingredient" name="ingredient" value={value2} onChange={handleChange2}>
+                                    <FormControlLabel value="Vegetarian" control={<Radio />} label="Vegetarian" />
+                                    <FormControlLabel value="Meat" control={<Radio />} label="Meat" />
+                                </RadioGroup>
+                                <FormLabel component="legend">Type of meal</FormLabel>
+                                <RadioGroup aria-label="Type of meal" name="mealType" value={value3} onChange={handleChange3}>
+                                    <FormControlLabel value="Appetizer" control={<Radio />} label="Appetizer" />
+                                    <FormControlLabel value="Meal" control={<Radio />} label="Meal" />
+                                    <FormControlLabel value="Dessert" control={<Radio />} label="Dessert" />
+                                </RadioGroup>
+                            </FormControl>
+                        </Box>
+                    </Typography>
                 </div>
             </div>
         )

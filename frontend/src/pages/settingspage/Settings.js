@@ -89,7 +89,8 @@ const Settings = () => {
         <h1>Edit profile</h1>
         <TextField
           id="standard-email"
-          value={user.email}
+          variant="outlined"
+          defaultValue={user.email}
           {...register("email")}
           error={errors.email ? true : false}
         />
