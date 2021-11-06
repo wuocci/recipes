@@ -13,6 +13,7 @@ module.exports = function (app) {
   });
 
   router.put("/:id", controller.addToFavourites);
+  router.put("/:id/delete/favourite", controller.deleteFavourites);
 
   app.get("/api/test/all", controller.allAccess);
 

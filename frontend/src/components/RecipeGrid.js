@@ -8,19 +8,24 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardHeader from "@material-ui/core/CardHeader";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import recipeimg from "../img/pesto.jpg";
 import recipeservice from "../services/recipeservice";
+import authservice from "../services/authservice";
+import userservice from "../services/userservice";
+import Tooltip from "@mui/material/Tooltip";
+
 import CircularProgress from "@mui/material/CircularProgress";
-import { Link, useLocation, useHistory } from "react-router-dom";
 
 export default function RecipeGrid() {
-  const [recipes, setRecipes] = useState(null);
+  const [recipes, setRecipes] = useState([]);
   const [openDialog, setDialog] = useState(false);
   const [clickedRecipe, setClickedRecipe] = useState();
-
-  let location = useLocation();
+  const [userFavourites, setFavourites] = useState([]);
+  const [user, setUser] = useState(authservice.getCurrentUser());
+  const [fav, setFav] = useState(false);
 
   const openRecipe = (item) => {
     setDialog(true);
@@ -37,7 +42,33 @@ export default function RecipeGrid() {
       .catch((error) => {
         throw error;
       });
-  }, []);
+  }, [openDialog, recipes]);
+
+  useEffect(() => {
+    setUser(authservice.getCurrentUser());
+    if (user === null) {
+      setFavourites([]);
+    } else {
+      setFavourites(user.favourites);
+    }
+  }, [fav, openDialog, recipes]);
+
+  const favouriteHandler = (item) => {
+    const profile = JSON.parse(localStorage.getItem("user"));
+    console.log(profile);
+    if (profile.favourites.includes(item._id)) {
+      const index = profile.favourites.indexOf(item._id);
+      profile.favourites.splice(index);
+      localStorage.setItem("user", JSON.stringify(profile));
+      userservice.deleteFavourite(user.id, item);
+    } else {
+      profile.favourites.push(item._id);
+      localStorage.setItem("user", JSON.stringify(profile));
+      userservice.addFavourite(user.id, item);
+    }
+    setUser(JSON.parse(localStorage.getItem("user")));
+    setFav(!fav);
+  };
 
   //add loader until recipes are fetched
   if (recipes === null) {
@@ -52,6 +83,9 @@ export default function RecipeGrid() {
         openDialog={openDialog}
         clickedRecipe={clickedRecipe}
         toggleModal={toggleModal}
+        userFavourites={userFavourites}
+        setFavourites={setFavourites}
+        recipes={recipes}
       ></RecipeDialog>
     );
   } else {
@@ -83,9 +117,26 @@ export default function RecipeGrid() {
                   </CardContent>
                 </CardActionArea>
                 <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
+                  {user !== null ? (
+                    <IconButton
+                      aria-label="add to favorites"
+                      onClick={() => favouriteHandler(item)}
+                    >
+                      {userFavourites.includes(item._id) ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
+                    </IconButton>
+                  ) : (
+                    <Tooltip title="You log in to add favourite recipes.">
+                      <span>
+                        <IconButton disabled aria-label="add to favorites">
+                          <FavoriteBorderIcon />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  )}
                 </CardActions>
               </Card>
             </Grid>

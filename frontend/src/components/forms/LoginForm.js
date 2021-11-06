@@ -28,7 +28,7 @@ const LoginForm = () => {
     authService.login(username, password).then(
       () => {
         history.push("/");
-        window.location.reload();
+        //  window.location.reload();
       },
       (error) => {
         setNotification(true);

@@ -19,6 +19,8 @@ const getRecipesByUser = async (userId) => {
 
 const postNewRecipe = (recipe) => {
   const request = axios.post(baseUrl, recipe);
+  const response = request;
+  return response.data;
 };
 
 const updateRecipe = async (id, newObject) => {

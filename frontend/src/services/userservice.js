@@ -26,8 +26,15 @@ const addFavourite = async (id, recipe) => {
   return response.data;
 };
 
+const deleteFavourite = async (id, recipe) => {
+  const request = axios.put(`${BASE_URL}${id}/delete/favourite`, recipe);
+  const response = await request;
+  return response.data;
+};
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   addFavourite,
+  deleteFavourite,
   getPublicContent,
   getUserBoard,
   getModeratorBoard,

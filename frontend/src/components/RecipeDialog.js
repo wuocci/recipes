@@ -18,23 +18,30 @@ import authservice from "../services/authservice";
 import CircularProgress from "@mui/material/CircularProgress";
 import Notification from "../Notification";
 import userservice from "../services/userservice";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
-  // const [showNotification, setNotification] = useState(false);
+const RecipeDialog = ({
+  openDialog,
+  toggleModal,
+  clickedRecipe,
+  userFavourites,
+  setFavourites,
+  recipes,
+}) => {
+  const [showNotification, setNotification] = useState(false);
   const [user, setUser] = useState(null);
   const [isUserRecipe, setIsUserRecipe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [openVerify, setVerify] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [fav, setFav] = useState();
 
   useEffect(() => {
     setLoading(false);
-    setUser(authservice.getCurrentUser());
-  }, []);
+  }, [openDialog]);
 
   setTimeout(() => {
-    setLoading(false);
     if (user !== null) {
       if (clickedRecipe.user[0].id === user.id) {
         setIsUserRecipe(true);
@@ -42,8 +49,30 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
     }
   }, 50);
 
-  const addToFavourites = () => {
-    console.log(userservice.addFavourite(user.id, clickedRecipe));
+  useEffect(() => {
+    setUser(authservice.getCurrentUser());
+    if (user === null) {
+      setFavourites([]);
+    } else {
+      setFavourites(user.favourites);
+    }
+  }, [fav, openDialog, recipes]);
+
+  const favouriteHandler = () => {
+    const profile = JSON.parse(localStorage.getItem("user"));
+    console.log(profile);
+    if (profile.favourites.includes(clickedRecipe._id)) {
+      const index = profile.favourites.indexOf(clickedRecipe._id);
+      profile.favourites.splice(index);
+      localStorage.setItem("user", JSON.stringify(profile));
+      userservice.deleteFavourite(user.id, clickedRecipe);
+    } else {
+      profile.favourites.push(clickedRecipe._id);
+      localStorage.setItem("user", JSON.stringify(profile));
+      userservice.addFavourite(user.id, clickedRecipe);
+    }
+    setUser(JSON.parse(localStorage.getItem("user")));
+    setFav(!fav);
   };
 
   const handleDelete = () => {
@@ -142,15 +171,27 @@ const RecipeDialog = ({ openDialog, toggleModal, clickedRecipe }) => {
               </DialogContentText>
 
               <DialogActions class="recipeFavorite">
-                <Button
-                  onClick={() => addToFavourites()}
-                  size="small"
-                  className="favourite-button"
-                  variant="outlined"
-                  startIcon={<FavoriteBorderIcon sx={{ color: "orange" }} />}
-                >
-                  Add favourite
-                </Button>
+                {userFavourites.includes(clickedRecipe._id) ? (
+                  <Button
+                    onClick={() => favouriteHandler()}
+                    size="small"
+                    className="favourite-button1"
+                    variant="contained"
+                    startIcon={<FavoriteIcon />}
+                  >
+                    Remove Favourite
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => favouriteHandler()}
+                    size="small"
+                    className="favourite-button2"
+                    variant="outlined"
+                    startIcon={<FavoriteBorderIcon sx={{ color: "black" }} />}
+                  >
+                    Add to Favourites
+                  </Button>
+                )}
               </DialogActions>
             </div>
           </DialogContent>

@@ -42,6 +42,7 @@ exports.create = (req, res) => {
 // Retrieve all Recipes from the database.
 exports.findAll = (req, res) => {
   Recipe.find({})
+    .limit(20)
     .then((data) => {
       res.json(data);
     })
