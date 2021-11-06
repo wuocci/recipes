@@ -1,4 +1,4 @@
-# RecibeBox
+# RecipeBox
 
 RecipeBox is a service users can upload recipes to. They can browse existing recipes and find their favorites.
 
