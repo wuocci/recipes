@@ -1,11 +1,9 @@
 # RecipeBox
 
-RecipeBox is a service users can upload recipes to. They can browse existing recipes and find their favorites.
+RecipeBox is a MERN base CRUD application where users can interact with recipes. They can browse existing recipes and find their favorites. 
+
+# Phase: Development
 
 Check the project tab to see what we're working on!
 
-https://www.figma.com/file/9NWGKIqqAsnQciCy5mtfDd/Untitled
-
-RecipeBox is a service users can upload recipes to. They can browse existing recipes and find their favorites.
-
-Check the project tab to see what we're working on!
+Mockups : https://www.figma.com/file/9NWGKIqqAsnQciCy5mtfDd/Untitled
