@@ -1,6 +1,6 @@
 # RecipeBox
 
-RecipeBox is a MERN base CRUD application where users can interact with recipes. They can browse existing recipes and find their favorites. 
+RecipeBox is a MERN based CRUD application where users can interact with recipes. They can browse existing recipes and find their favorites. 
 
 ## Key features atm
  * Users can create an account and log in
