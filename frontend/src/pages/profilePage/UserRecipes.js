@@ -12,10 +12,11 @@ import recipeimg from "../../img/pesto.jpg";
 import IconButton from "@material-ui/core/IconButton";
 import { Typography } from "@material-ui/core";
 import recipeservice from "../../services/recipeservice";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 
-const UserRecipes = ({ userData }) => {
+const UserRecipes = ({ userData, favourites, setFavourites }) => {
   const [userRecipes, setUserRecipes] = useState([]);
   const [clickedRecipe, setClickedRecipe] = useState();
   const [openDialog, setDialog] = useState(false);
@@ -54,6 +55,8 @@ const UserRecipes = ({ userData }) => {
             openDialog={openDialog}
             clickedRecipe={clickedRecipe}
             toggleModal={toggleModal}
+            userFavourites={favourites}
+            setFavourites={setFavourites}
           ></RecipeDialog>
         )}
         <Grid container spacing={5}>
@@ -82,7 +85,11 @@ const UserRecipes = ({ userData }) => {
                   </CardContent>
                   <CardActions disableSpacing>
                     <IconButton aria-label="add to favorites">
-                      <FavoriteIcon />
+                      {favourites.includes(item._id) ? (
+                        <FavoriteIcon />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
                     </IconButton>
                   </CardActions>
                 </CardActionArea>

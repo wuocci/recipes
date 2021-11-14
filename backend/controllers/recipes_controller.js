@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     user: req.body.user,
   });
 
-  // Save Tutorial in the database
+  // Save Recipe in the database
   recipe
     .save(recipe)
     .then((data) => {

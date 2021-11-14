@@ -11,6 +11,7 @@ import { useHistory } from "react-router";
 
 const ProfileInfo = ({ userData }) => {
   const [userRecipes, setUserRecipes] = useState([]);
+  const [favourites, setFavourites] = useState([]);
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -25,11 +26,24 @@ const ProfileInfo = ({ userData }) => {
       .catch((error) => {
         throw error;
       });
-  }, []);
+    if (userData !== null) {
+      userData.favourites.map((item) => {
+        let favs = [...favourites];
+        recipeservice
+          .getRecipeById(item)
+          .then((data) => favs.push(data))
+          .catch((error) => {
+            throw error;
+          });
+        setFavourites(favs);
+      });
+    }
+  }, [userData]);
 
   setTimeout(() => {
+    console.log(favourites);
     setLoading(false);
-  }, 50);
+  }, 500);
 
   const handleSettings = () => {
     history.push("/" + userData.id + "/settings");
@@ -52,7 +66,7 @@ const ProfileInfo = ({ userData }) => {
               {userRecipes.length} recipes added
             </Typography>
             <Typography variant="body2" component="p">
-              x favourites
+              {favourites.length} favourites
             </Typography>
           </div>
           <Button
@@ -65,7 +79,11 @@ const ProfileInfo = ({ userData }) => {
           </Button>
         </div>
         <Divider />
-        <TabPanel userData={userData} />
+        <TabPanel
+          userData={userData}
+          favourites={favourites}
+          setFavourites={setFavourites}
+        />
       </div>
     );
   } else {

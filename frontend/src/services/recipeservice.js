@@ -17,6 +17,12 @@ const getRecipesByUser = async (userId) => {
   return response.data;
 };
 
+const getRecipeById = async (id) => {
+  const request = await axios.get(`${baseUrl}/recipe=/${id}`);
+  const response = request;
+  return response.data;
+};
+
 const postNewRecipe = (recipe) => {
   const request = axios.post(baseUrl, recipe);
   const response = request;
@@ -34,6 +40,7 @@ const toBeExported = {
   updateRecipe,
   deleteRecipe,
   getRecipesByUser,
+  getRecipeById,
   postNewRecipe,
 };
 
