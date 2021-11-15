@@ -7,14 +7,14 @@ import recipeservice from "../../services/recipeservice";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TabPanel from "./TabPanel";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const ProfileInfo = ({ userData }) => {
   const [userRecipes, setUserRecipes] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     //extract path id
@@ -46,7 +46,7 @@ const ProfileInfo = ({ userData }) => {
   }, 500);
 
   const handleSettings = () => {
-    history.push("/" + userData.id + "/settings");
+    navigate("/" + userData.id + "/settings");
   };
 
   if (!loading && userData !== null) {

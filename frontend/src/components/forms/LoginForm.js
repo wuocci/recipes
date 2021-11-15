@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Notification from "../../Notification";
 import authService from "../../services/authservice";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 const LoginForm = () => {
@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [errorMessage, setMessage] = useState("");
   const [showNotification, setNotification] = useState(false);
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -27,7 +27,7 @@ const LoginForm = () => {
     event.preventDefault();
     authService.login(username, password).then(
       () => {
-        history.push("/");
+        navigate("/");
         //  window.location.reload();
       },
       (error) => {

@@ -5,12 +5,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import logo from "../../img/logoAppbar.svg";
 import AuthService from "../../services/authservice";
 import AddNewRecipeDialog from "../AddNewRecipeDialog";
-import { useHistory } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import Identicon from "react-identicons";
-
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const ButtonAppBar = () => {
@@ -24,16 +23,16 @@ const ButtonAppBar = () => {
   const toggleModal = (val) => setDialog(val);
 
   const isProfilePage = AuthService.getCurrentUser();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     AuthService.logout();
-    history.push("/");
+    navigate("/");
     window.location.reload();
   };
 
   const handleProfile = () => {
-    history.push("/" + isProfilePage.id);
+    navigate("/" + isProfilePage.id);
   };
 
   const handleMenu = (event) => {

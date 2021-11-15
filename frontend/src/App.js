@@ -5,7 +5,7 @@ import LoginPage from "./pages/logInPage/LoginPage.js";
 import SignUpPage from "./pages/signUpPage/SignUpPage.js";
 import authService from "./services/authservice";
 import SuccessfulRegistration from "./pages/signUpPage/SuccessfulRegistration";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import SettingsPage from "./pages/settingspage/SettingsPage";
 import RecipeDialog from "./components/RecipeDialog";
@@ -21,20 +21,14 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Switch>
-          <Route exact path="/">
-            <FrontPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/sign-up">
-            <SignUpPage />
-          </Route>
-          <Route path="/success" exact component={SuccessfulRegistration} />
-          <Route path="/:userId" exact component={ProfilePage} />
-          <Route path="/:userId/settings" exact component={SettingsPage} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<FrontPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/success" element={<SuccessfulRegistration />} />
+          <Route path="/:userId" element={<ProfilePage />} />
+          <Route path="/:userId/settings" element={<SettingsPage />} />
+        </Routes>
       </div>
     </Router>
   );

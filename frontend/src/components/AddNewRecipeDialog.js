@@ -16,10 +16,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { TextField, Typography } from "@material-ui/core";
 import recipeservice from "../services/recipeservice";
 import authService from "../services/authservice";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const [mainIngredient, setMainIngredient] = useState("");
   const [mealType, setMealType] = useState("");
@@ -76,7 +76,7 @@ const AddNewRecipeDialog = ({ openDialog, toggleModal }) => {
     recipeservice.postNewRecipe(myRecipe);
     console.log(myRecipe);
     toggleModal(false);
-    history.push("/" + getUser.id);
+    navigate("/" + getUser.id);
   };
   return (
     <div>

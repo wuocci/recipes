@@ -8,7 +8,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const SignUpForm = () => {
   const [showNotification, setNotification] = useState(false);
   const [errorMessage, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // schema for form data
   const validationSchema = Yup.object().shape({
@@ -47,7 +47,7 @@ const SignUpForm = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      history.push({
+      navigate({
         pathname: "/success",
         state: { user: data.username },
       });

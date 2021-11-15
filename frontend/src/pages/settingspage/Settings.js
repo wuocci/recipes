@@ -5,7 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import Notification from "../../Notification";
 import TextField from "@material-ui/core/TextField";
@@ -16,7 +16,7 @@ const Settings = () => {
   const [showNotification, setNotification] = useState(false);
   const [errorMessage, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // schema for form data
   const validationSchema = Yup.object().shape({
