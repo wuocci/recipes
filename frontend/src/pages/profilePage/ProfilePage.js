@@ -6,17 +6,10 @@ import UserRecipes from "./UserRecipes.js";
 import TabPanel from "./TabPanel.js";
 
 const ProfilePage = () => {
-  const [userData, setUserData] = useState(null);
-  const [favourites, isFavourite] = useState(false);
-
-  useEffect(() => {
-    setUserData(authService.getCurrentUser());
-  }, []);
-
   return (
     <div className="ProfilePage">
       <ButtonAppBar />
-      <ProfileInfo userData={userData} />
+      <ProfileInfo />
     </div>
   );
 };

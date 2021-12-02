@@ -60,6 +60,9 @@ const UserRecipes = ({ userData, favourites, setFavourites }) => {
           ></RecipeDialog>
         )}
         <Grid container spacing={5}>
+          {userRecipes.length === 0 && (
+            <Typography variant="body1"> No recipes added yet! </Typography>
+          )}
           {userRecipes.map((item) => (
             <Grid item xs={2}>
               <Card className="recipe-card">

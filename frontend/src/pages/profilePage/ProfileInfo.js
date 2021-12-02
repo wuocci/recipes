@@ -4,17 +4,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Divider } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import recipeservice from "../../services/recipeservice";
+import authService from "../../services/authservice";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TabPanel from "./TabPanel";
 import { useNavigate } from "react-router-dom";
 
-const ProfileInfo = ({ userData }) => {
+const ProfileInfo = () => {
   const [userRecipes, setUserRecipes] = useState([]);
   const [favourites, setFavourites] = useState([]);
+  const [userData, setUserData] = useState(authService.getCurrentUser());
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     setLoading(true);
     //extract path id
@@ -28,27 +31,23 @@ const ProfileInfo = ({ userData }) => {
       });
     if (userData !== null) {
       userData.favourites.map((item) => {
-        let favs = [...favourites];
         recipeservice
           .getRecipeById(item)
-          .then((data) => favs.push(data))
+          .then((data) => setFavourites((favourites) => [...favourites, data]))
           .catch((error) => {
             throw error;
           });
-        setFavourites(favs);
       });
     }
   }, [userData]);
 
   setTimeout(() => {
-    console.log(favourites);
     setLoading(false);
   }, 500);
 
   const handleSettings = () => {
     navigate("/" + userData.id + "/settings");
   };
-
   if (!loading && userData !== null) {
     return (
       <div className="profile">
@@ -79,11 +78,7 @@ const ProfileInfo = ({ userData }) => {
           </Button>
         </div>
         <Divider />
-        <TabPanel
-          userData={userData}
-          favourites={favourites}
-          setFavourites={setFavourites}
-        />
+        <TabPanel favourites={favourites} setFavourites={setFavourites} />
       </div>
     );
   } else {

@@ -16,7 +16,6 @@ import recipeservice from "../services/recipeservice";
 import authservice from "../services/authservice";
 import userservice from "../services/userservice";
 import Tooltip from "@mui/material/Tooltip";
-
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function RecipeGrid() {
@@ -49,6 +48,10 @@ export default function RecipeGrid() {
     if (user === null) {
       setFavourites([]);
     } else {
+      console.log(user);
+      if (user.favourites === undefined || user.favourites === null) {
+        setFavourites([]);
+      }
       setFavourites(user.favourites);
     }
   }, [fav, openDialog, recipes]);

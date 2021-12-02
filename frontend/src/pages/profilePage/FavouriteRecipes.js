@@ -26,7 +26,6 @@ const FavouriteRecipes = ({ favourites, setFavourites }) => {
 
   setTimeout(() => {
     setLoading(false);
-    console.log(favourites);
   }, 1000);
 
   const openRecipe = (item) => {
@@ -36,18 +35,25 @@ const FavouriteRecipes = ({ favourites, setFavourites }) => {
 
   const toggleModal = (val) => setDialog(val);
 
-  if (!loading) {
+  if (loading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  } else if (openDialog) {
+    return (
+      <RecipeDialog
+        openDialog={openDialog}
+        clickedRecipe={clickedRecipe}
+        toggleModal={toggleModal}
+        userFavourites={favourites}
+        setFavourites={setFavourites}
+      ></RecipeDialog>
+    );
+  } else {
     return (
       <div className="user-recipes-grid">
-        {openDialog && (
-          <RecipeDialog
-            openDialog={openDialog}
-            clickedRecipe={clickedRecipe}
-            toggleModal={toggleModal}
-            userFavourites={favourites}
-            setFavourites={setFavourites}
-          ></RecipeDialog>
-        )}
         <Grid container spacing={5}>
           {favourites.map((item) => (
             <Grid item xs={2}>
@@ -77,7 +83,7 @@ const FavouriteRecipes = ({ favourites, setFavourites }) => {
                       {favourites.includes(item._id) ? (
                         <FavoriteIcon />
                       ) : (
-                        <FavoriteBorderIcon />
+                        <FavoriteIcon />
                       )}
                     </IconButton>
                   </CardActions>
@@ -86,12 +92,6 @@ const FavouriteRecipes = ({ favourites, setFavourites }) => {
             </Grid>
           ))}
         </Grid>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <CircularProgress />
       </div>
     );
   }

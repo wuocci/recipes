@@ -28,7 +28,7 @@ const RecipeDialog = ({
   recipes,
 }) => {
   const [showNotification, setNotification] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(authservice.getCurrentUser());
   const [isUserRecipe, setIsUserRecipe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [openVerify, setVerify] = useState(false);
@@ -42,6 +42,7 @@ const RecipeDialog = ({
 
   setTimeout(() => {
     if (user !== null) {
+      setLoading(false);
       if (clickedRecipe.user[0].id === user.id) {
         setIsUserRecipe(true);
       }
@@ -49,7 +50,6 @@ const RecipeDialog = ({
   }, 50);
 
   useEffect(() => {
-    setUser(authservice.getCurrentUser());
     if (user === null) {
       setFavourites([]);
     } else {
