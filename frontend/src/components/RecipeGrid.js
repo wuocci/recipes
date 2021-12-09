@@ -41,7 +41,7 @@ export default function RecipeGrid() {
       .catch((error) => {
         throw error;
       });
-  }, [openDialog, recipes]);
+  }, [openDialog]);
 
   useEffect(() => {
     setUser(authservice.getCurrentUser());
