@@ -12,11 +12,15 @@ import recipeimg from "../../img/pesto.jpg";
 import IconButton from "@material-ui/core/IconButton";
 import { Typography } from "@material-ui/core";
 import recipeservice from "../../services/recipeservice";
+import authservice from "../../services/authservice";
+import userservice from "../../services/userservice";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 
-const UserRecipes = ({ userData, favourites, setFavourites }) => {
+const UserRecipes = ({ favouriteFlag, setFavouriteFlag }) => {
+  const [profile, setProfile] = useState(authservice.getCurrentUser());
+  const [favourites, setFavourites] = useState([]);
   const [userRecipes, setUserRecipes] = useState([]);
   const [clickedRecipe, setClickedRecipe] = useState();
   const [openDialog, setDialog] = useState(false);
@@ -24,7 +28,6 @@ const UserRecipes = ({ userData, favourites, setFavourites }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     //extract path id
     const pathWithSlash = location.pathname;
     const id = pathWithSlash.slice(1);
@@ -36,18 +39,60 @@ const UserRecipes = ({ userData, favourites, setFavourites }) => {
       });
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    setProfile(authservice.getCurrentUser());
+    if (profile !== undefined) {
+      if (profile.favourites.length === 0) {
+        setFavourites([]);
+      }
+    }
+  }, [favouriteFlag, openDialog]);
+
   setTimeout(() => {
     setLoading(false);
-  }, 1000);
+  }, 100);
 
   const openRecipe = (item) => {
     setClickedRecipe(item);
     setDialog(true);
   };
 
+  const favouriteHandler = (item) => {
+    if (profile.favourites.some((fav) => fav._id === item._id)) {
+      const index = profile.favourites.findIndex(
+        (recipe) => recipe._id === item._id
+      );
+      profile.favourites.splice(index);
+      localStorage.setItem("user", JSON.stringify(profile));
+      userservice.deleteFavourite(profile.id, item);
+    } else {
+      profile.favourites.push(item);
+      localStorage.setItem("user", JSON.stringify(profile));
+      userservice.addFavourite(profile.id, item);
+    }
+    setFavouriteFlag(!favouriteFlag);
+  };
+
   const toggleModal = (val) => setDialog(val);
 
-  if (!loading) {
+  if (loading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  } else if (openDialog) {
+    return (
+      <RecipeDialog
+        openDialog={openDialog}
+        clickedRecipe={clickedRecipe}
+        toggleModal={toggleModal}
+        userFavourites={favourites}
+        setFavourites={setFavourites}
+      ></RecipeDialog>
+    );
+  } else {
     return (
       <div className="user-recipes-grid">
         {openDialog && (
@@ -60,9 +105,7 @@ const UserRecipes = ({ userData, favourites, setFavourites }) => {
           ></RecipeDialog>
         )}
         <Grid container spacing={5}>
-          {userRecipes.length === 0 && (
-            <Typography variant="body1"> No recipes added yet! </Typography>
-          )}
+          {userRecipes.length === 0 && <div> No recipes added yet! </div>}
           {userRecipes.map((item) => (
             <Grid item xs={2}>
               <Card className="recipe-card">
@@ -86,26 +129,23 @@ const UserRecipes = ({ userData, favourites, setFavourites }) => {
                       {item.description}
                     </Typography>
                   </CardContent>
-                  <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                      {favourites.includes(item._id) ? (
-                        <FavoriteIcon />
-                      ) : (
-                        <FavoriteBorderIcon />
-                      )}
-                    </IconButton>
-                  </CardActions>
                 </CardActionArea>
+                <CardActions disableSpacing>
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={() => favouriteHandler(item)}
+                  >
+                    {profile.favourites.some((fav) => fav._id === item._id) ? (
+                      <FavoriteIcon />
+                    ) : (
+                      <FavoriteBorderIcon />
+                    )}
+                  </IconButton>
+                </CardActions>
               </Card>
             </Grid>
           ))}
         </Grid>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <CircularProgress />
       </div>
     );
   }

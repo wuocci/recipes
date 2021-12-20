@@ -60,13 +60,13 @@ const RecipeDialog = ({
   const favouriteHandler = () => {
     const profile = JSON.parse(localStorage.getItem("user"));
     console.log(profile);
-    if (profile.favourites.includes(clickedRecipe._id)) {
+    if (profile.favourites.some((fav) => fav._id === clickedRecipe._id)) {
       const index = profile.favourites.indexOf(clickedRecipe._id);
-      profile.favourites.splice(index);
+      profile.favourites.splice(index, 1);
       localStorage.setItem("user", JSON.stringify(profile));
       userservice.deleteFavourite(user.id, clickedRecipe);
     } else {
-      profile.favourites.push(clickedRecipe._id);
+      profile.favourites.push(clickedRecipe);
       localStorage.setItem("user", JSON.stringify(profile));
       userservice.addFavourite(user.id, clickedRecipe);
     }
@@ -170,7 +170,7 @@ const RecipeDialog = ({
               </DialogContentText>
 
               <DialogActions class="recipeFavorite">
-                {userFavourites.includes(clickedRecipe._id) ? (
+                {userFavourites.some((fav) => fav._id === clickedRecipe._id) ? (
                   <Button
                     onClick={() => favouriteHandler()}
                     size="small"

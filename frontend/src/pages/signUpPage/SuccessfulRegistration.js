@@ -26,7 +26,7 @@ const SuccessfulRegistration = () => {
         </Typography>
         <Typography variant="body1" component="p">
           {" "}
-          Welcome, <strong>{location.state.user}</strong>{" "}
+          Welcome, <strong>Joo</strong>{" "}
         </Typography>
         <Typography variant="body2" component="p">
           Thank you for registering, enjoy!

@@ -49,23 +49,30 @@ export default function RecipeGrid() {
       setFavourites([]);
     } else {
       console.log(user);
-      if (user.favourites === undefined || user.favourites === null) {
+      if (
+        user.favourites === undefined ||
+        user.favourites === null ||
+        user.favourites.length === 0
+      ) {
         setFavourites([]);
       }
       setFavourites(user.favourites);
+      console.log(userFavourites);
     }
   }, [fav, openDialog, recipes]);
 
   const favouriteHandler = (item) => {
     const profile = JSON.parse(localStorage.getItem("user"));
     console.log(profile);
-    if (profile.favourites.includes(item._id)) {
-      const index = profile.favourites.indexOf(item._id);
-      profile.favourites.splice(index);
+    if (profile.favourites.some((fav) => fav._id === item._id)) {
+      const index = profile.favourites.findIndex(
+        (recipe) => recipe._id === item._id
+      );
+      profile.favourites.splice(index, 1);
       localStorage.setItem("user", JSON.stringify(profile));
       userservice.deleteFavourite(user.id, item);
     } else {
-      profile.favourites.push(item._id);
+      profile.favourites.push(item);
       localStorage.setItem("user", JSON.stringify(profile));
       userservice.addFavourite(user.id, item);
     }
@@ -125,14 +132,14 @@ export default function RecipeGrid() {
                       aria-label="add to favorites"
                       onClick={() => favouriteHandler(item)}
                     >
-                      {userFavourites.includes(item._id) ? (
+                      {userFavourites.some((fav) => fav._id === item._id) ? (
                         <FavoriteIcon />
                       ) : (
                         <FavoriteBorderIcon />
                       )}
                     </IconButton>
                   ) : (
-                    <Tooltip title="You log in to add favourite recipes.">
+                    <Tooltip title="Log in to add favourite recipes.">
                       <span>
                         <IconButton disabled aria-label="add to favorites">
                           <FavoriteBorderIcon />

@@ -12,25 +12,48 @@ import IconButton from "@material-ui/core/IconButton";
 import { Typography } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import RecipeDialog from "../../components/RecipeDialog";
+import userservice from "../../services/userservice";
+import authservice from "../../services/authservice";
+import recipeservice from "../../services/recipeservice";
 
-const FavouriteRecipes = ({ favourites, setFavourites }) => {
+const FavouriteRecipes = ({ setFavouriteFlag, favouriteFlag }) => {
+  const [profile, setProfile] = useState(authservice.getCurrentUser());
   const [openDialog, setDialog] = useState(false);
+  const [favourites, setFavourites] = useState([]);
   const [clickedRecipe, setClickedRecipe] = useState();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-  }, []);
+    setProfile(authservice.getCurrentUser());
+    setFavourites([]);
+    if (profile !== undefined) {
+      if (profile.favourites.length === 0) {
+        setFavourites([]);
+      }
+    }
+  }, [favouriteFlag, openDialog]);
 
   setTimeout(() => {
+    console.log(favourites);
     setLoading(false);
-  }, 1000);
+  }, 100);
 
   const openRecipe = (item) => {
     setClickedRecipe(item);
     setDialog(true);
+  };
+
+  const favouriteHandler = (item) => {
+    const index = profile.favourites.findIndex(
+      (recipe) => recipe._id === item._id
+    );
+    console.log(index);
+    profile.favourites.splice(index, 1);
+    localStorage.setItem("user", JSON.stringify(profile));
+    userservice.deleteFavourite(profile.id, item);
+    setFavouriteFlag(!favouriteFlag);
   };
 
   const toggleModal = (val) => setDialog(val);
@@ -41,57 +64,59 @@ const FavouriteRecipes = ({ favourites, setFavourites }) => {
         <CircularProgress />
       </div>
     );
-  } else if (openDialog) {
-    return (
-      <RecipeDialog
-        openDialog={openDialog}
-        clickedRecipe={clickedRecipe}
-        toggleModal={toggleModal}
-        userFavourites={favourites}
-        setFavourites={setFavourites}
-      ></RecipeDialog>
-    );
   } else {
     return (
       <div className="user-recipes-grid">
-        <Grid container spacing={5}>
-          {favourites.map((item) => (
-            <Grid item xs={2}>
-              <Card className="recipe-card">
-                <CardActionArea onClick={() => openRecipe(item)}>
-                  <CardMedia
-                    component="img"
-                    alt="Picture of the recipe"
-                    height="120"
-                    image={recipeimg}
-                  />
-                  <CardHeader
-                    title={item.title}
-                    subheader={" by " + item.user[0].username}
-                  />
-                  <CardContent>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      {item.description}
-                    </Typography>
-                  </CardContent>
+        {profile.favourites.length === 0 && (
+          <div> No favourites added yet </div>
+        )}
+        {openDialog ? (
+          <RecipeDialog
+            openDialog={openDialog}
+            clickedRecipe={clickedRecipe}
+            toggleModal={toggleModal}
+            userFavourites={favourites}
+            setFavourites={setFavourites}
+          ></RecipeDialog>
+        ) : (
+          <Grid container spacing={5}>
+            {profile.favourites.map((item) => (
+              <Grid item xs={2}>
+                <Card className="recipe-card">
+                  <CardActionArea onClick={() => openRecipe(item)}>
+                    <CardMedia
+                      component="img"
+                      alt="Picture of the recipe"
+                      height="120"
+                      image={recipeimg}
+                    />
+                    <CardHeader
+                      title={item.title}
+                      subheader={" by " + item.user[0].username}
+                    />
+                    <CardContent>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {item.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
                   <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                      {favourites.includes(item._id) ? (
-                        <FavoriteIcon />
-                      ) : (
-                        <FavoriteIcon />
-                      )}
+                    <IconButton
+                      aria-label="remove from favorites"
+                      onClick={() => favouriteHandler(item)}
+                    >
+                      <FavoriteIcon />
                     </IconButton>
                   </CardActions>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </div>
     );
   }

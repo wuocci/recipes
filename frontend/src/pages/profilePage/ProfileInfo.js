@@ -12,8 +12,8 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileInfo = () => {
   const [userRecipes, setUserRecipes] = useState([]);
-  const [favourites, setFavourites] = useState([]);
-  const [userData, setUserData] = useState(authService.getCurrentUser());
+  const [favouriteFlag, setFavouriteFlag] = useState(false);
+  const [userData, setUserData] = useState();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const ProfileInfo = () => {
   useEffect(() => {
     setLoading(true);
     //extract path id
+    setUserData(authService.getCurrentUser());
     const pathWithSlash = location.pathname;
     const id = pathWithSlash.slice(1);
     recipeservice
@@ -29,26 +30,17 @@ const ProfileInfo = () => {
       .catch((error) => {
         throw error;
       });
-    if (userData !== null) {
-      userData.favourites.map((item) => {
-        recipeservice
-          .getRecipeById(item)
-          .then((data) => setFavourites((favourites) => [...favourites, data]))
-          .catch((error) => {
-            throw error;
-          });
-      });
-    }
-  }, [userData]);
+  }, [favouriteFlag]);
 
   setTimeout(() => {
     setLoading(false);
-  }, 500);
+  }, 100);
 
   const handleSettings = () => {
     navigate("/" + userData.id + "/settings");
   };
-  if (!loading && userData !== null) {
+
+  if (!loading && userData !== undefined) {
     return (
       <div className="profile">
         <Divider />
@@ -65,7 +57,7 @@ const ProfileInfo = () => {
               {userRecipes.length} recipes added
             </Typography>
             <Typography variant="body2" component="p">
-              {favourites.length} favourites
+              {userData.favourites.length} favourites
             </Typography>
           </div>
           <Button
@@ -78,7 +70,11 @@ const ProfileInfo = () => {
           </Button>
         </div>
         <Divider />
-        <TabPanel favourites={favourites} setFavourites={setFavourites} />
+        <TabPanel
+          userData={userData}
+          favouriteFlag={favouriteFlag}
+          setFavouriteFlag={setFavouriteFlag}
+        />
       </div>
     );
   } else {

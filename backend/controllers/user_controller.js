@@ -19,7 +19,7 @@ exports.moderatorBoard = (req, res) => {
 
 exports.addToFavourites = (id, req) => {
   const userId = id.params.id;
-  const addThisToFavourites = { $push: { favourites: id.body._id } };
+  const addThisToFavourites = { $push: { favourites: id.body } };
   User.updateOne({ _id: userId }, addThisToFavourites, function (err, res) {
     if (err) throw err;
     console.log("Recipe added to favourites");
@@ -28,7 +28,7 @@ exports.addToFavourites = (id, req) => {
 
 exports.deleteFavourites = (id, req) => {
   const userId = id.params.id;
-  const deleteThisFromFavourites = { $pull: { favourites: id.body._id } };
+  const deleteThisFromFavourites = { $pull: { favourites: id.body } };
   User.updateOne(
     { _id: userId },
     deleteThisFromFavourites,

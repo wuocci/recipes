@@ -60,7 +60,8 @@ exports.findOne = (req, res) => {
     .then((data) => {
       if (!data)
         res.status(404).send({ message: "Not found Recipe with id " + id });
-      else res.send(data);
+      else console.log(data);
+      res.send(data);
     })
     .catch((err) => {
       res

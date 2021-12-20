@@ -42,9 +42,9 @@ function a11yProps(index) {
 
 export default function BasicTabs({
   userData,
-  favourites,
-  setFavourites,
   userRecipes,
+  favouriteFlag,
+  setFavouriteFlag,
 }) {
   const [value, setValue] = React.useState(0);
 
@@ -67,14 +67,15 @@ export default function BasicTabs({
       <TabPanel value={value} index={0}>
         <UserRecipes
           userRecipes={userRecipes}
-          favourites={favourites}
-          setFavourites={setFavourites}
+          favouriteFlag={favouriteFlag}
+          setFavouriteFlag={setFavouriteFlag}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <FavouriteRecipes
-          favourites={favourites}
-          setFavourites={setFavourites}
+          userData={userData}
+          favouriteFlag={favouriteFlag}
+          setFavouriteFlag={setFavouriteFlag}
         />
       </TabPanel>
     </Box>
